@@ -22,11 +22,25 @@
     else if (activeScene == 2)
     {
         <div class="scene scene-2">
-            <div class="glass-card">
-                <h1 class="neon-text-red siren-alert">The Attack Surface</h1>
-                <div class="attack-fortress siren-alert">Broken Fortress</div>
-                <p>Compliance Warning: Database Breach!</p>
-                <button class="btn-next" @onclick="NextScene">Shift Paradigm</button>
+            <div class="glass-card" style="max-width: 850px; text-align: left; padding: 40px;">
+                <h1 class="neon-text-red siren-alert" style="margin-bottom: 20px;">The Honeypot Problem</h1>
+                
+                <h3 class="neon-text-blue" style="font-style: italic; border-left: 4px solid #00f0ff; padding-left: 20px; margin-bottom: 25px; line-height: 1.4;">
+                    "If there is no database to hack, there is no breach to fear. We build high-impact business utilities that run entirely on the client’s machine—bringing speed, utility, and absolute data privacy without the security debt of traditional web platforms."
+                </h3>
+                
+                <p style="font-size: 1.1rem; margin-bottom: 15px;"><strong>Modern web software is broken.</strong> Traditional systems force clients to centralize sensitive customer data into fragile databases, creating a massive security liability and target for bad actors.</p>
+                
+                <p style="font-size: 1.1rem; margin-bottom: 20px;"><strong>My approach is different: Zero-Liability Architecture.</strong> I don’t replace your digital ecosystem; I reassemble your existing assets. By fabricating custom, client-side utility engines that run directly on the user's device, we deliver:</p>
+                
+                <ul style="margin-top: 15px; line-height: 1.7; font-size: 1.05rem; list-style-type: square; padding-left: 25px;">
+                    <li><strong class="neon-text-green">Zero Data Custody:</strong> Customer inputs, calculations, and documents are processed locally and destroyed upon closing the browser tab.</li>
+                    <li><strong class="neon-text-green">Zero Friction:</strong> No bloated sign-up forms, password managers, or login screens for crews in the field.</li>
+                    <li><strong class="neon-text-green">Zero Security Liabilities:</strong> Zero authentication attack surface, zero risk of data breaches, and zero data compliance overhead.</li>
+                    <li><strong class="neon-text-green">Pure Utility & Analytics:</strong> Secure, anonymous telemetry to prove business value (e.g., job completion volume) without ever compromising customer privacy.</li>
+                </ul>
+
+                <button class="btn-next" @onclick="NextScene" style="margin-top: 35px; width: 100%;">Shift Paradigm</button>
             </div>
         </div>
     }
