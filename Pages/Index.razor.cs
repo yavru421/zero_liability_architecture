@@ -13,6 +13,8 @@ public partial class Index : ComponentBase, IAsyncDisposable
     private DotNetObjectReference<Index>? dotNetHelper;
     
     public int CurrentCard { get; set; } = 0; // JS is 0-indexed
+    public bool IsPlaying { get; set; } = false;
+    public int ActiveTrackNum { get; set; } = 1;
 
     private readonly string[] rhymes = new[]
     {
@@ -30,8 +32,9 @@ public partial class Index : ComponentBase, IAsyncDisposable
             dotNetHelper = DotNetObjectReference.Create(this);
             await JSRuntime.InvokeVoidAsync("zlaInterop.initSwipeDeck", dotNetHelper);
             
-            // Trigger first narration on load
-            await JSRuntime.InvokeVoidAsync("zlaInterop.speakText", rhymes[0]);
+            // Listeners in JS will autoplay on first touch/click, update state accordingly
+            IsPlaying = true;
+            StateHasChanged();
         }
     }
 
@@ -39,12 +42,24 @@ public partial class Index : ComponentBase, IAsyncDisposable
     public async Task OnCardSnapped(int cardIndex)
     {
         CurrentCard = cardIndex;
+        IsPlaying = await JSRuntime.InvokeAsync<bool>("zlaInterop.isAudioPlaying");
+        ActiveTrackNum = await JSRuntime.InvokeAsync<int>("zlaInterop.getCurrentTrackNum");
         StateHasChanged();
-        
-        if (cardIndex >= 0 && cardIndex <= 4)
-        {
-            await JSRuntime.InvokeVoidAsync("zlaInterop.speakText", rhymes[cardIndex]);
-        }
+    }
+
+    public async Task TogglePlay()
+    {
+        IsPlaying = await JSRuntime.InvokeAsync<bool>("zlaInterop.togglePlay");
+        ActiveTrackNum = await JSRuntime.InvokeAsync<int>("zlaInterop.getCurrentTrackNum");
+        StateHasChanged();
+    }
+
+    public async Task SelectTrack(int trackNum)
+    {
+        await JSRuntime.InvokeVoidAsync("zlaInterop.switchTrack", trackNum);
+        ActiveTrackNum = trackNum;
+        IsPlaying = true;
+        StateHasChanged();
     }
 
     public async Task NextCard()

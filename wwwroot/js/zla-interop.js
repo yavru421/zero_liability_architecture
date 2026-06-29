@@ -24,22 +24,21 @@ window.zlaInterop = {
             
             if (window.zlaAudio.currentTrack !== track) {
                 otherTrack.pause();
-                otherTrack.currentTime = 0;
                 
                 track.play().catch(e => {
                     console.log("Audio play blocked by browser, waiting for user interaction.", e);
                 });
                 window.zlaAudio.currentTrack = track;
+            } else if (track.paused) {
+                track.play().catch(e => {});
             }
         };
 
         const handleAudioForCard = (index) => {
-            // Card 1-2 (0, 1): Play Sneeker Mc Snoot
-            // Card 3-6 (2, 3, 4, 5): Play Snoot's Last Confession
-            if (index === 0 || index === 1) {
-                playTrack('track1');
-            } else {
-                playTrack('track2');
+            // Do not force track switching or resetting on card snap anymore.
+            // This allows the full song to play continuously as the user swipes.
+            if (!window.zlaAudio.currentTrack) {
+                playTrack('track1'); // Default to track 1 on start
             }
         };
 
@@ -199,6 +198,42 @@ window.zlaInterop = {
         if (el) {
             el.classList.add('dissolving');
         }
+    },
+
+    togglePlay: function() {
+        if (!window.zlaAudio) return false;
+        if (!window.zlaAudio.currentTrack) {
+            window.zlaAudio.currentTrack = window.zlaAudio.track1;
+        }
+        if (window.zlaAudio.currentTrack.paused) {
+            window.zlaAudio.currentTrack.play().catch(e=>{});
+            return true;
+        } else {
+            window.zlaAudio.currentTrack.pause();
+            return false;
+        }
+    },
+
+    switchTrack: function(trackNum) {
+        if (!window.zlaAudio) return;
+        const trackName = 'track' + trackNum;
+        const track = window.zlaAudio[trackName];
+        const otherTrack = trackNum === 1 ? window.zlaAudio.track2 : window.zlaAudio.track1;
+        
+        otherTrack.pause();
+        track.currentTime = 0; // restart from beginning when explicitly switched
+        track.play().catch(e=>{});
+        window.zlaAudio.currentTrack = track;
+    },
+
+    isAudioPlaying: function() {
+        if (!window.zlaAudio || !window.zlaAudio.currentTrack) return false;
+        return !window.zlaAudio.currentTrack.paused;
+    },
+
+    getCurrentTrackNum: function() {
+        if (!window.zlaAudio || !window.zlaAudio.currentTrack) return 1;
+        return window.zlaAudio.currentTrack === window.zlaAudio.track1 ? 1 : 2;
     },
 
     // Legacy Whimsical TTS Narrator (No-op since we are using MP4 music files now)

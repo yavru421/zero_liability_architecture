@@ -290,4 +290,96 @@ h1, h2, h3, .card-title {
     .card-illustration img {
         max-height: 40vh;
     }
+
+    .audio-control-panel {
+        top: 15px;
+        right: 15px;
+        left: 15px;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 8px 12px;
+        border-radius: 20px;
+        max-width: none;
+    }
+
+    .now-playing-label {
+        display: none; /* Hide text label on small mobile screens to save space */
+    }
+}
+
+/* Audio Control Panel */
+.audio-control-panel {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    z-index: 10005;
+    background: rgba(25, 25, 32, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 30px;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.audio-btn.play-pause-btn {
+    background: #ffaa00;
+    color: #000;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 0;
+    box-shadow: 0 4px 10px rgba(255, 170, 0, 0.3);
+    transition: all 0.2s ease;
+}
+
+.audio-btn.play-pause-btn:hover {
+    transform: scale(1.1);
+    background: #ffcc00;
+}
+
+.now-playing-label {
+    font-family: 'Fredoka One', cursive;
+    letter-spacing: 0.5px;
+    color: rgba(255,255,255,0.85);
+}
+
+.track-selector {
+    display: flex;
+    gap: 8px;
+}
+
+.track-selector .track-btn {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #fff;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.track-selector .track-btn:hover {
+    background: rgba(255,255,255,0.15);
+}
+
+.track-selector .track-btn.selected {
+    background: #00f0ff;
+    color: #000;
+    border-color: #00f0ff;
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
 }

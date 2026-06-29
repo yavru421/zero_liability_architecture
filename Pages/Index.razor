@@ -1,6 +1,18 @@
 @page "/"
 
 <div class="swipe-deck">
+    <!-- Floating Audio Control Panel -->
+    <div class="audio-control-panel glassmorphic">
+        <button class="audio-btn play-pause-btn" @onclick="TogglePlay">
+            @(IsPlaying ? "⏸" : "▶")
+        </button>
+        <span class="now-playing-label">Now Playing: @(ActiveTrackNum == 1 ? "Sneeker Mc Snoot" : "Snoot's Last Confession")</span>
+        <div class="track-selector">
+            <button class="track-btn @(ActiveTrackNum == 1 ? "selected" : "")" @onclick="() => SelectTrack(1)">Track 1</button>
+            <button class="track-btn @(ActiveTrackNum == 2 ? "selected" : "")" @onclick="() => SelectTrack(2)">Track 2</button>
+        </div>
+    </div>
+
     <div class="card-stack" id="cardStack">
         
         <!-- Card 1: The Greedy Server -->
