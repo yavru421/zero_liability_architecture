@@ -15,53 +15,69 @@
 
     <div class="card-stack" id="cardStack">
         
-        <!-- Card 1: Phoning Home -->
+        <!-- Card 1: The Greedy Server -->
         <div class="swipe-card card-1" id="card1">
             <div class="card-frame-border"></div>
             <div class="card-inner">
                 <div class="card-content">
-                    <h1 class="card-title">Phoning Home.</h1>
+                    <h1 class="card-title">The Greedy Server.</h1>
                     <blockquote class="seuss-rhyme">
-                        Other apps phone home. Every file, click, and keystroke goes to their servers.
+                        There once was a Server named Sneeker-Mc-Snoot,<br/>
+                        Who gathered up data and kept it as loot.<br/>
+                        "Upload your files to my cloud in the sky!<br/>
+                        Send them to me!" was his welcoming cry.<br/>
+                        But when you upload to his box far away,<br/>
+                        Who knows what he does with your files at the day?
                     </blockquote>
                     <button class="cta-btn" @onclick="NextCard">See the Threat &rarr;</button>
                 </div>
                 <div class="card-illustration">
-                    <img src="images/card1.png" alt="Phoning Home" />
+                    <img src="images/card1.png" alt="Sneeker-Mc-Snoot" />
                 </div>
             </div>
         </div>
         
-        <!-- Card 2: The Server Threat -->
+        <!-- Card 2: The Target -->
         <div class="swipe-card card-2" id="card2">
             <div class="card-frame-border"></div>
             <div class="card-inner">
                 <div class="card-content">
-                    <h1 class="card-title">The Server Threat.</h1>
+                    <h1 class="card-title">The Target.</h1>
                     <blockquote class="seuss-rhyme">
-                        Online databases are giant targets for hackers. If they get breached, your data is exposed.
+                        For databases are targets for sneaks in the night,<br/>
+                        Who steal all your data and run in a fright.<br/>
+                        If there is no server to hold what you make,<br/>
+                        There is nothing to steal and no database to break!
                     </blockquote>
+                    <div class="glassmorphic-callout">
+                        "If there is no database to hack, there is no breach to fear."
+                    </div>
                     <button class="cta-btn" @onclick="NextCard">See the Solution &rarr;</button>
                 </div>
                 <div class="card-illustration">
-                    <img src="images/card2.png" alt="The Server Threat" />
+                    <img src="images/card2.png" alt="The Target" />
                 </div>
             </div>
         </div>
         
-        <!-- Card 3: On-Device Processing -->
+        <!-- Card 3: The Solution -->
         <div class="swipe-card card-3" id="card3">
             <div class="card-frame-border"></div>
             <div class="card-inner">
                 <div class="card-content">
-                    <h1 class="card-title">On-Device Processing.</h1>
+                    <h1 class="card-title">The Solution.</h1>
                     <blockquote class="seuss-rhyme">
-                        ZLA apps run 100% inside your browser using your device's power. They never send your data to a server.
+                        So we built a tool that stays right in your hand,<br/>
+                        The quickest and safest tool in the land!<br/>
+                        It runs in your browser, it lives on your screen,<br/>
+                        The cleanest machine that you ever have seen.<br/>
+                        It never phones home, and it never will send<br/>
+                        A byte of your work to a server or friend!
                     </blockquote>
                     <button class="cta-btn" @onclick="NextCard">Test It Out &rarr;</button>
                 </div>
                 <div class="card-illustration">
-                    <img src="images/card3.png" alt="On-Device Processing" />
+                    <img src="images/card3.png" alt="The Solution" />
                 </div>
             </div>
         </div>
@@ -73,7 +89,10 @@
                 <div class="card-content">
                     <h1 class="card-title">Disconnect Proof.</h1>
                     <blockquote class="seuss-rhyme">
-                        You can turn off your internet completely right now. The tool will still function, because it does not rely on a remote server.
+                        You can turn off your internet, shut down the line,<br/>
+                        The tool will still function, completely and fine!<br/>
+                        It processes locally, safe on your screen,<br/>
+                        No phoning to Sneeker, no servers in-between!
                     </blockquote>
                     
                     <div class="interactive-demo">
@@ -112,7 +131,10 @@
                 <div class="card-content">
                     <h1 class="card-title">Zero Custody.</h1>
                     <blockquote class="seuss-rhyme">
-                        You get your results directly on your screen. Because we don't store your files, we can't lose them. No accounts, no logins.
+                        Your calculations are finished, your safety is won,<br/>
+                        Without sending your files, the processing's done!<br/>
+                        We don't store your files, we have nothing to grab,<br/>
+                        Wiped clean from your screen when you close up the tab!
                     </blockquote>
                     <button class="cta-btn" @onclick='() => TriggerConfetti("card5")'>Finish Job</button>
                     <button class="cta-btn secondary" @onclick="NextCard" style="margin-top: 10px;">Finish &rarr;</button>

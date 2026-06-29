@@ -46,11 +46,11 @@ public partial class Index : ComponentBase, IAsyncDisposable
 
     private readonly string[] rhymes = new[]
     {
-        "Other apps phone home. Every file, click, and keystroke goes to their servers.",
-        "Online databases are giant targets for hackers. If they get breached, your data is exposed.",
-        "ZLA apps run 100% inside your browser using your device's power. They never send your data to a server.",
-        "You can turn off your internet completely right now. The tool will still function, because it does not rely on a remote server.",
-        "You get your results directly on your screen. Because we don't store your files, we can't lose them. No accounts, no logins."
+        "There once was a Server named Sneeker-Mc-Snoot, Who gathered up data and kept it as loot. 'Upload your files to my cloud in the sky! Send them to me!' was his welcoming cry. But when you upload to his box far away, Who knows what he does with your files at the day?",
+        "For databases are targets for sneaks in the night, Who steal all your data and run in a fright. If there is no server to hold what you make, There is nothing to steal and no database to break!",
+        "So we built a tool that stays right in your hand, The quickest and safest tool in the land! It runs in your browser, it lives on your screen, The cleanest machine that you ever have seen. It never phones home, and it never will send A byte of your work to a server or friend!",
+        "You can turn off your internet, shut down the line, The tool will still function, completely and fine! It processes locally, safe on your screen, No phoning to Sneeker, no servers in-between!",
+        "Your calculations are finished, your safety is won, Without sending your files, the processing's done! We don't store your files, we have nothing to grab, Wiped clean from your screen when you close up the tab!"
     };
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
