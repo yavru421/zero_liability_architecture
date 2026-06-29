@@ -1,166 +1,139 @@
 @page "/"
-@using System.Runtime.InteropServices.JavaScript
-@implements IDisposable
 
-<div class="app-container scene-@activeScene">
-    <h1 class="pipeline-title">Operational Absolution: The Zero-Liability Architecture (ZLA) Pipeline</h1>
+<div class="swipe-deck">
+    <div class="card-stack" id="cardStack">
+        
+        <!-- Card 1: The Greedy Server -->
+        <div class="swipe-card card-1" id="card1">
+            <div class="card-frame-border"></div>
+            <div class="card-inner">
+                <div class="card-content">
+                    <h1 class="card-title">The Greedy Server.</h1>
+                    <blockquote class="seuss-rhyme">
+                        There once was a Server named Sneeker-Mc-Snoot,<br/>
+                        Who gathered up data and kept it as loot.<br/>
+                        "Give me your passwords! Give me your files!"<br/>
+                        You'd upload and wait across miles and miles.
+                    </blockquote>
+                    <button class="cta-btn" @onclick="NextCard">See the Danger &rarr;</button>
+                </div>
+                <div class="card-illustration">
+                    <img src="images/card1.png" alt="Sneeker-Mc-Snoot" />
+                </div>
+            </div>
+        </div>
+        
+        <!-- Card 2: The Target -->
+        <div class="swipe-card card-2" id="card2">
+            <div class="card-frame-border"></div>
+            <div class="card-inner">
+                <div class="card-content">
+                    <h1 class="card-title">The Target.</h1>
+                    <blockquote class="seuss-rhyme">
+                        But servers are targets for sneaks in the night,<br/>
+                        Who steal all your data and run in a fright.<br/>
+                        If there is no database locked in a box,<br/>
+                        There is nothing to steal, and no picking of locks!
+                    </blockquote>
+                    <div class="glassmorphic-callout">
+                        "If there is no database to hack, there is no breach to fear."
+                    </div>
+                    <button class="cta-btn" @onclick="NextCard">Find the Solution &rarr;</button>
+                </div>
+                <div class="card-illustration">
+                    <img src="images/card2.png" alt="The Database Danger" />
+                </div>
+            </div>
+        </div>
+        
+        <!-- Card 3: The Solution -->
+        <div class="swipe-card card-3" id="card3">
+            <div class="card-frame-border"></div>
+            <div class="card-inner">
+                <div class="card-content">
+                    <h1 class="card-title">The Solution.</h1>
+                    <blockquote class="seuss-rhyme">
+                        So we built a tool that stays right in your hand,<br/>
+                        The quickest and safest tool in the land!<br/>
+                        It runs in your browser, it lives on your screen,<br/>
+                        The cleanest machine that you ever have seen.
+                    </blockquote>
+                    <button class="cta-btn" @onclick="NextCard">Test It Out &rarr;</button>
+                </div>
+                <div class="card-illustration">
+                    <img src="images/card3.png" alt="The Magic Machine" />
+                </div>
+            </div>
+        </div>
+        
+        <!-- Card 4: The Test -->
+        <div class="swipe-card card-4" id="card4">
+            <div class="card-frame-border"></div>
+            <div class="card-inner">
+                <div class="card-content">
+                    <h1 class="card-title">The Test.</h1>
+                    <blockquote class="seuss-rhyme">
+                        You pour in your numbers, they spin and they slide,<br/>
+                        They calculate quickly right here inside.<br/>
+                        And once you are done and you close up the tab,<br/>
+                        Your data dissolves &mdash; there is nothing to grab!
+                    </blockquote>
+                    <button class="cta-btn" @onclick="Dissolve">Close Tab</button>
+                    <button class="cta-btn secondary" @onclick="NextCard" style="margin-top: 10px;">Next &rarr;</button>
+                </div>
+                <div class="card-illustration">
+                    <div class="animated-numbers" id="card4-numbers">
+                        <!-- Simulated numbers -->
+                        <span>1</span><span>3</span><span>8</span><span>5</span><span>0</span><span>2</span>
+                    </div>
+                    <img src="images/card4.png" alt="The Disappearing Act" />
+                </div>
+            </div>
+        </div>
+        
+        <!-- Card 5: The Output -->
+        <div class="swipe-card card-5" id="card5" style="position: relative;">
+            <div class="card-frame-border"></div>
+            <div class="card-inner">
+                <div class="card-content">
+                    <h1 class="card-title">The Output.</h1>
+                    <blockquote class="seuss-rhyme">
+                        Your PDF's ready, your document's done!<br/>
+                        No logins, no signups, the victory's won!<br/>
+                        It's fast and it's private, beginning to end,<br/>
+                        With zero security debts to defend!
+                    </blockquote>
+                    <button class="cta-btn" @onclick='() => TriggerConfetti("card5")'>Get Finished File</button>
+                    <button class="cta-btn secondary" @onclick="NextCard" style="margin-top: 10px;">Finish &rarr;</button>
+                </div>
+                <div class="card-illustration">
+                    <img src="images/card5.png" alt="The Clean Slate" />
+                </div>
+            </div>
+        </div>
+        
+        <!-- Card 6: Mission Statement -->
+        <div class="swipe-card card-6 mission-card" id="card6">
+            <div class="card-inner pure-text">
+                <h1 class="card-title">Zero-Liability Architecture&trade;</h1>
+                <p class="mission-text">
+                    Built by Dondlinger General Contracting.<br/>
+                    High-impact business utilities. Zero custody. Zero friction. Zero breach exposure.
+                </p>
+                <div class="social-links">
+                    <a href="https://zla.dondlingergc.com" target="_blank">zla.dondlingergc.com</a>
+                    <a href="mailto:info@dondlingergc.com">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
     
-    <div class="stage-card">
-        @if (activeScene == 1)
-        {
-            <div class="card-header">
-                <span class="stage-label">Step 1: The Greedy Server</span>
-                <h2>The Sneeker-Mc-Snoot</h2>
-                <div class="seuss-rhyme">
-                    "There once was a Server named Sneeker-Mc-Snoot,<br/>
-                    Who gathered up data and kept it as loot.<br/>
-                    'Give me your passwords! Give me your files!'<br/>
-                    You'd upload and wait across miles and miles."
-                </div>
-            </div>
-            <div class="card-visual visual-fortress">
-                <div class="visual-placeholder fortress"></div>
-            </div>
-            <div class="card-footer glassmorphic">
-                <h3>Slow and Frustrating</h3>
-                <p>Traditional systems make you wait and make you register, collecting security debt every step of the way.</p>
-                <div class="gamification-controls">
-                    <button class="slow-upload-btn" @onclick="SimulateUpload" disabled="@isUploading">
-                        @(isUploading ? $"Uploading... {uploadProgress}%" : "Try Uploading a File")
-                    </button>
-                    @if(uploadProgress >= 100)
-                    {
-                        <button class="btn-next" @onclick="NextScene">See the Danger</button>
-                    }
-                </div>
-            </div>
-        }
-        else if (activeScene == 2)
-        {
-            <div class="card-header">
-                <span class="stage-label neon-text-red">Step 2: The Sneaky Thief</span>
-                <h2 class="neon-text-red siren-alert-text">The Database Danger</h2>
-                <div class="seuss-rhyme">
-                    "But servers are targets for sneaks in the night,<br/>
-                    Who steal all your data and run in a fright.<br/>
-                    If there is no database locked in a box,<br/>
-                    There is nothing to steal, and no picking of locks!"
-                </div>
-            </div>
-            <div class="card-visual visual-breach">
-                <div class="visual-placeholder broken-fortress siren-alert"></div>
-            </div>
-            <div class="card-footer glassmorphic">
-                <h3>"If there is no database to hack, there is no breach to fear."</h3>
-                <p>Zero custody means zero liability. We don't store your assets; we reassemble them locally.</p>
-                <div class="gamification-controls">
-                    <button class="btn-next danger-btn" @onclick="NextScene">Find the Cure</button>
-                </div>
-            </div>
-        }
-        else if (activeScene == 3)
-        {
-            <div class="card-header">
-                <span class="stage-label neon-text-cyan">Step 3: The Magic Machine</span>
-                <h2 class="neon-text-cyan">Private and Clean!</h2>
-                <div class="seuss-rhyme">
-                    "So we built a tool that stays right in your hand,<br/>
-                    The quickest and safest tool in the land!<br/>
-                    It runs in your browser, it lives on your screen,<br/>
-                    The cleanest machine that you ever have seen."
-                </div>
-            </div>
-            <div class="card-visual visual-blueprint">
-                <div class="visual-placeholder blueprint wireframe-pulse"></div>
-            </div>
-            <div class="card-footer glassmorphic">
-                <h3>Runs on Your Device</h3>
-                <p>A Zero-Liability tool processes everything right in front of you—bringing utility without security debt.</p>
-                <div class="gamification-controls">
-                    <button class="btn-next cyan-btn" @onclick="NextScene">Try the Magic</button>
-                </div>
-            </div>
-        }
-        else if (activeScene == 4)
-        {
-            <div class="card-header">
-                <span class="stage-label neon-text-green">Step 4: The Magic Trick</span>
-                <h2 class="neon-text-green">The Disappearing Act</h2>
-                <div class="seuss-rhyme">
-                    "You pour in your numbers, they spin and they slide,<br/>
-                    They calculate quickly right here inside.<br/>
-                    And once you are done and you close up the tab,<br/>
-                    Your data dissolves—there is nothing to grab!"
-                </div>
-            </div>
-            <div class="card-visual visual-pour">
-                <div class="visual-placeholder data-pour">
-                    <p class="pour-status">Current Status: @(pourState == "ZLA" ? "Processing Locally" : pourState == "Complete" ? "Cleaned & Wiped" : "Ready to Process")</p>
-                </div>
-            </div>
-            <div class="card-footer glassmorphic">
-                <h3>Wiped Instantly</h3>
-                <p>Watch it process in memory, and observe it wipe completely clean when finished.</p>
-                <div class="gamification-controls row-controls">
-                    <button class="action-btn" @onclick='() => SetPourState("ZLA")'>Process Data Locally</button>
-                    <button class="action-btn" @onclick='() => SetPourState("Complete")'>Wipe and Reset</button>
-                    @if (pourState == "Complete")
-                    {
-                        <button class="btn-next green-btn" @onclick="NextScene">Get Your Output</button>
-                    }
-                </div>
-            </div>
-        }
-        else if (activeScene == 5)
-        {
-            <div class="card-header">
-                <span class="stage-label neon-text-green">Step 5: The Clean Slate</span>
-                <h2 class="neon-text-green">Second to None!</h2>
-                <div class="seuss-rhyme">
-                    "Your PDF's ready, your document's done!<br/>
-                    No logins, no signups, the victory's won!<br/>
-                    It's fast and it's private, beginning to end,<br/>
-                    With zero security debts to defend!"
-                </div>
-            </div>
-            <div class="card-visual visual-output">
-                <div class="visual-placeholder dashboard-output">
-                    @if(celebrateActive)
-                    {
-                        <h2 class="neon-text-green celebration-text">🎉 Document Generated Safely 🎉</h2>
-                    }
-                </div>
-            </div>
-            <div class="card-footer glassmorphic">
-                <h3>Absolute Privacy</h3>
-                <p>Speed, utility, and absolute data privacy without the security debt of traditional web platforms.</p>
-                <div class="gamification-controls">
-                    <button class="celebration-btn" @onclick="Celebrate">Get Finished File</button>
-                </div>
-            </div>
-        }
+    <div class="progress-rail">
+        <div class="progress-dot @(CurrentCard == 0 ? "active" : "")"></div>
+        <div class="progress-dot @(CurrentCard == 1 ? "active" : "")"></div>
+        <div class="progress-dot @(CurrentCard == 2 ? "active" : "")"></div>
+        <div class="progress-dot @(CurrentCard == 3 ? "active" : "")"></div>
+        <div class="progress-dot @(CurrentCard == 4 ? "active" : "")"></div>
+        <div class="progress-dot @(CurrentCard == 5 ? "active" : "")"></div>
     </div>
 </div>
-
-@code {
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        if (firstRender)
-        {
-            await InitializeJavaScriptAsync();
-        }
-    }
-
-    private async Task InitializeJavaScriptAsync()
-    {
-        try
-        {
-            await JSHost.ImportAsync("zla-interop", "../js/zla-interop.js");
-            PlayNarrator();
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"JS Init Error: {ex.Message}");
-        }
-    }
-}

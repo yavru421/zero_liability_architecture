@@ -1,67 +1,92 @@
 window.zlaInterop = {
-    // Scene 3: Draw Wireframe Jig
-    drawWireframeJig: function (elementId) {
-        const el = document.getElementById(elementId);
-        if (!el) return;
-        
-        // SVG wireframe animation logic
-        el.innerHTML = `
-            <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
-                <path d="M10,90 L50,10 L90,90 Z" fill="none" stroke="#00f0ff" stroke-width="2" stroke-dasharray="300" stroke-dashoffset="300">
-                    <animate attributeName="stroke-dashoffset" from="300" to="0" dur="2s" fill="freeze" />
-                </path>
-                <circle cx="50" cy="50" r="20" fill="none" stroke="#39ff14" stroke-width="1" stroke-dasharray="150" stroke-dashoffset="150">
-                    <animate attributeName="stroke-dashoffset" from="150" to="0" dur="1.5s" begin="0.5s" fill="freeze" />
-                </circle>
-            </svg>
-        `;
-    },
+    initSwipeDeck: function (dotNetHelper) {
+        if (window._swipeDeckInitialized) return;
+        window._swipeDeckInitialized = true;
 
-    // Scene 4: Slider/Drag Logic
-    initPourSlider: function (dotNetHelper, elementId) {
-        const el = document.getElementById(elementId);
-        if (!el) return;
-
+        let currentIndex = 0;
+        let startY = 0;
+        let currentY = 0;
         let isDragging = false;
         
-        el.addEventListener('mousedown', (e) => {
-            isDragging = true;
-        });
+        const getStack = () => document.querySelector('.card-stack');
         
-        el.addEventListener('touchstart', (e) => {
-            isDragging = true;
-        }, { passive: true });
-
-        window.addEventListener('mouseup', () => {
-            isDragging = false;
-        });
-        
-        window.addEventListener('touchend', () => {
-            isDragging = false;
-        });
-
-        const updatePosition = (clientX) => {
-            if (!isDragging) return;
-            const rect = el.parentElement.getBoundingClientRect();
-            let percentage = ((clientX - rect.left) / rect.width) * 100;
-            percentage = Math.max(0, Math.min(100, percentage));
-            el.style.left = percentage + '%';
-            
-            // Call back to Blazor
-            if (dotNetHelper) {
-                dotNetHelper.invokeMethodAsync('UpdatePourState', percentage);
-            }
+        const updateTransform = (offset = 0, animate = false) => {
+            const stack = getStack();
+            if (!stack) return;
+            stack.style.transition = animate ? 'transform 0.3s ease-out' : 'none';
+            stack.style.transform = `translateY(calc(-${currentIndex * 100}vh + ${offset}px))`;
         };
 
-        window.addEventListener('mousemove', (e) => {
-            updatePosition(e.clientX);
+        const handleStart = (y) => {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
+            startY = y;
+            isDragging = true;
+            currentY = y;
+            updateTransform(0, false);
+        };
+        
+        const handleMove = (y) => {
+            if (!isDragging) return;
+            currentY = y;
+            const deltaY = currentY - startY;
+            updateTransform(deltaY, false);
+        };
+        
+        const handleEnd = () => {
+            if (!isDragging) return;
+            isDragging = false;
+            
+            const stack = getStack();
+            if (!stack) return;
+            
+            const deltaY = currentY - startY;
+            const cardsCount = stack.children.length;
+            
+            if (deltaY < -60 && currentIndex < cardsCount - 1) {
+                currentIndex++;
+                dotNetHelper.invokeMethodAsync('OnCardSnapped', currentIndex);
+            } else if (deltaY > 60 && currentIndex > 0) {
+                currentIndex--;
+                dotNetHelper.invokeMethodAsync('OnCardSnapped', currentIndex);
+            }
+            
+            updateTransform(0, true);
+        };
+        
+        window.addEventListener('touchstart', (e) => handleStart(e.touches[0].clientY), { passive: true });
+        window.addEventListener('touchmove', (e) => handleMove(e.touches[0].clientY), { passive: true });
+        window.addEventListener('touchend', handleEnd);
+        
+        window.addEventListener('mousedown', (e) => handleStart(e.clientY));
+        window.addEventListener('mousemove', (e) => handleMove(e.clientY));
+        window.addEventListener('mouseup', handleEnd);
+        
+        window.addEventListener('keydown', (e) => {
+            const stack = getStack();
+            if (!stack) return;
+            
+            const cardsCount = stack.children.length;
+            let changed = false;
+            
+            if (e.key === 'ArrowDown' && currentIndex < cardsCount - 1) {
+                currentIndex++;
+                changed = true;
+            } else if (e.key === 'ArrowUp' && currentIndex > 0) {
+                currentIndex--;
+                changed = true;
+            }
+            
+            if (changed) {
+                if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+                updateTransform(0, true);
+                dotNetHelper.invokeMethodAsync('OnCardSnapped', currentIndex);
+            }
         });
         
-        window.addEventListener('touchmove', (e) => {
-            if (e.touches.length > 0) {
-                updatePosition(e.touches[0].clientX);
-            }
-        }, { passive: true });
+        // Initial setup
+        updateTransform(0, false);
     },
 
     // Scene 5: Celebration
@@ -117,11 +142,19 @@ window.zlaInterop = {
         }, 4000);
     },
 
-    // Scroll snapping helper
-    scrollToElement: function (elementId) {
+    snapToNext: function() {
+        if (!window._swipeDeckInitialized) return;
+        const stack = document.querySelector('.card-stack');
+        if (!stack) return;
+        
+        let evt = new KeyboardEvent('keydown', {'key': 'ArrowDown'});
+        window.dispatchEvent(evt);
+    },
+    
+    triggerDissolve: function(elementId) {
         const el = document.getElementById(elementId);
         if (el) {
-            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            el.classList.add('dissolving');
         }
     },
 

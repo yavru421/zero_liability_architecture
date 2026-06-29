@@ -1,106 +1,70 @@
-using System;
-using System.Runtime.InteropServices.JavaScript;
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
+using System;
 using System.Threading.Tasks;
 
-namespace ZeroLiabilityArchitecture.Pages
+namespace ZeroLiabilityArchitecture.Pages;
+
+public partial class Index : ComponentBase, IAsyncDisposable
 {
-    public partial class Index : IDisposable
+    [Inject]
+    public IJSRuntime JSRuntime { get; set; } = default!;
+
+    private DotNetObjectReference<Index>? dotNetHelper;
+    
+    public int CurrentCard { get; set; } = 0; // JS is 0-indexed
+
+    private readonly string[] rhymes = new[]
     {
-        private int activeScene = 1;
-        private bool isUploading = false;
-        private int uploadProgress = 0;
-        private bool isAttacked = false;
-        private string pourState = "None"; // None, SaaS, ZLA, Complete
-        private bool jigDissolved = false;
-        private bool celebrateActive = false;
+        "There once was a Server named Sneeker-Mc-Snoot, Who gathered up data and kept it as loot. Give me your passwords! Give me your files! You'd upload and wait across miles and miles.",
+        "But servers are targets for sneaks in the night, Who steal all your data and run in a fright. If there is no database locked in a box, There is nothing to steal, and no picking of locks!",
+        "So we built a tool that stays right in your hand, The quickest and safest tool in the land! It runs in your browser, it lives on your screen, The cleanest machine that you ever have seen.",
+        "You pour in your numbers, they spin and they slide, They calculate quickly right here inside. And once you are done and you close up the tab, Your data dissolves, there is nothing to grab!",
+        "Your P D F's ready, your document's done! No logins, no signups, the victory's won! It's fast and it's private, beginning to end, With zero security debts to defend!"
+    };
 
-        [JSImport("triggerConfetti", "zla-interop")]
-        internal static partial void TriggerConfettiJS();
-
-        [JSImport("speakText", "zla-interop")]
-        internal static partial void SpeakTextJS(string text);
-
-        private async Task SimulateUpload()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
         {
-            if (isUploading) return;
-            isUploading = true;
-            uploadProgress = 0;
-            StateHasChanged();
+            dotNetHelper = DotNetObjectReference.Create(this);
+            await JSRuntime.InvokeVoidAsync("zlaInterop.initSwipeDeck", dotNetHelper);
             
-            while (uploadProgress < 100)
-            {
-                await Task.Delay(200);
-                uploadProgress += 10;
-                StateHasChanged();
-            }
-            isUploading = false;
-            isAttacked = true;
-            StateHasChanged();
+            // Trigger first narration on load
+            await JSRuntime.InvokeVoidAsync("zlaInterop.speakText", rhymes[0]);
         }
+    }
 
-        private void NextScene()
+    [JSInvokable("OnCardSnapped")]
+    public async Task OnCardSnapped(int cardIndex)
+    {
+        CurrentCard = cardIndex;
+        StateHasChanged();
+        
+        if (cardIndex >= 0 && cardIndex <= 4)
         {
-            if (activeScene < 5)
-            {
-                activeScene++;
-                StateHasChanged();
-                PlayNarrator();
-            }
+            await JSRuntime.InvokeVoidAsync("zlaInterop.speakText", rhymes[cardIndex]);
         }
+    }
 
-        public void PlayNarrator()
-        {
-            string rhyme = activeScene switch
-            {
-                1 => "There once was a Server named Sneeker-Mc-Snoot, who gathered up data and kept it as loot. Give me your passwords! Give me your files! You'd upload and wait across miles and miles.",
-                2 => "But servers are targets for sneaks in the night, who steal all your data and run in a fright. If there is no database locked in a box, there is nothing to steal, and no picking of locks!",
-                3 => "So we built a tool that stays right in your hand, the quickest and safest tool in the land! It runs in your browser, it lives on your screen, the cleanest machine that you ever have seen.",
-                4 => "You pour in your numbers, they spin and they slide, they calculate quickly right here inside. And once you are done and you close up the tab, your data dissolves, there is nothing to grab!",
-                5 => "Your P D F's ready, your document's done! No logins, no signups, the victory's won! It's fast and it's private, beginning to end, with zero security debts to defend!",
-                _ => ""
-            };
-            
-            if (!string.IsNullOrEmpty(rhyme))
-            {
-                try
-                {
-                    SpeakTextJS(rhyme);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"TTS Error: {ex.Message}");
-                }
-            }
-        }
+    public async Task NextCard()
+    {
+        await JSRuntime.InvokeVoidAsync("zlaInterop.snapToNext");
+    }
 
-        private void SetPourState(string state)
-        {
-            pourState = state;
-            if (state == "ZLA")
-            {
-                jigDissolved = true;
-            }
-            StateHasChanged();
-        }
+    public async Task TriggerConfetti(string elementId)
+    {
+        await JSRuntime.InvokeVoidAsync("zlaInterop.triggerConfetti", elementId);
+    }
+    
+    public async Task Dissolve()
+    {
+        await JSRuntime.InvokeVoidAsync("zlaInterop.triggerDissolve", "card4-numbers");
+    }
 
-        private void Celebrate()
-        {
-            celebrateActive = true;
-            try
-            {
-                TriggerConfettiJS();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Confetti Trigger Error: {ex.Message}");
-            }
-            StateHasChanged();
-        }
-
-        public void Dispose()
-        {
-            // Clean up resources if necessary
-        }
+    public async ValueTask DisposeAsync()
+    {
+        dotNetHelper?.Dispose();
+        GC.SuppressFinalize(this);
     }
 }
