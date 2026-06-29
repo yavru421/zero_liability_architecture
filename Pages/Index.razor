@@ -2,10 +2,12 @@
 @using System.Runtime.InteropServices.JavaScript
 @implements IDisposable
 
-<div class="pipeline-wrapper">
+<div class="app-container scene-@activeScene">
     <h1 class="pipeline-title">Operational Absolution: The Zero-Liability Architecture (ZLA) Pipeline</h1>
-    <div class="pipeline-container">
-        <div class="stage-card stage-1">
+    
+    <div class="stage-card">
+        @if (activeScene == 1)
+        {
             <div class="card-header">
                 <span class="stage-label">Stage 1: The Sluggish SaaS Monument</span>
                 <h2>The Fortress of Friction</h2>
@@ -17,68 +19,101 @@
             <div class="card-footer glassmorphic">
                 <h3>Centralized Liability</h3>
                 <p>Traditional systems force the centralization of sensitive data into fragile databases, creating a massive target for bad actors.</p>
+                <div class="gamification-controls">
+                    <button class="slow-upload-btn" @onclick="SimulateUpload" disabled="@isUploading">
+                        @(isUploading ? $"Uploading... {uploadProgress}%" : "Simulate SaaS Upload")
+                    </button>
+                    @if(uploadProgress >= 100)
+                    {
+                        <button class="btn-next" @onclick="NextScene">Next Stage</button>
+                    }
+                </div>
             </div>
-        </div>
-
-        <div class="stage-card stage-2">
+        }
+        else if (activeScene == 2)
+        {
             <div class="card-header">
                 <span class="stage-label neon-text-red">Stage 2: The Attack Surface</span>
-                <h2 class="neon-text-red">Breach Vulnerability</h2>
+                <h2 class="neon-text-red siren-alert-text">Breach Vulnerability</h2>
                 <p>The fortress appears broken, triggered by visual "neon laser red" sirens and cascading security/compliance warnings.</p>
             </div>
             <div class="card-visual visual-breach">
-                <div class="visual-placeholder broken-fortress"></div>
+                <div class="visual-placeholder broken-fortress siren-alert"></div>
             </div>
             <div class="card-footer glassmorphic">
                 <h3>The Security Debt</h3>
                 <p>Every byte of customer data held in custody is a liability; if there is a database to hack, there is a breach to fear.</p>
+                <div class="gamification-controls">
+                    <button class="btn-next danger-btn" @onclick="NextScene">Shift Paradigm</button>
+                </div>
             </div>
-        </div>
-
-        <div class="stage-card stage-3">
+        }
+        else if (activeScene == 3)
+        {
             <div class="card-header">
                 <span class="stage-label neon-text-cyan">Stage 3: The Digital Jig</span>
                 <h2 class="neon-text-cyan">The Paradigm Shift</h2>
                 <p>A clean, high-contrast cyan and neon-green wireframe blueprint appears, representing the ZLA "Jig".</p>
             </div>
             <div class="card-visual visual-blueprint">
-                <div class="visual-placeholder blueprint"></div>
+                <div class="visual-placeholder blueprint wireframe-pulse"></div>
             </div>
             <div class="card-footer glassmorphic">
                 <h3>Scaffolding over Syntax</h3>
                 <p>This wireframe neon input form is a temporary structure designed to hold the business logic of CX and browser API interop straight.</p>
+                <div class="gamification-controls">
+                    <button class="btn-next cyan-btn" @onclick="NextScene">See it in Action</button>
+                </div>
             </div>
-        </div>
-
-        <div class="stage-card stage-4">
+        }
+        else if (activeScene == 4)
+        {
             <div class="card-header">
                 <span class="stage-label neon-text-green">Stage 4: The Zero Data Custody Wipe</span>
                 <h2 class="neon-text-green">The Data Pour & Form Dissolve</h2>
                 <p>Users "pour" data into the jig: as the "concrete" (data output) sets, the neon wireframe form physically dissolves or wipes clean.</p>
             </div>
             <div class="card-visual visual-pour">
-                <div class="visual-placeholder data-pour"></div>
+                <div class="visual-placeholder data-pour">
+                    <p class="pour-status">Pour State: @pourState</p>
+                </div>
             </div>
             <div class="card-footer glassmorphic">
                 <h3>Total Data Sovereignty</h3>
                 <p>Customer inputs and calculations are processed locally in the Blazor WASM environment and destroyed the moment the browser tab is closed.</p>
+                <div class="gamification-controls row-controls">
+                    <button class="action-btn" @onclick='() => SetPourState("ZLA")'>Pour Data (Local)</button>
+                    <button class="action-btn" @onclick='() => SetPourState("Complete")'>Finish Pour</button>
+                    @if (pourState == "Complete")
+                    {
+                        <button class="btn-next green-btn" @onclick="NextScene">Generate Output</button>
+                    }
+                </div>
             </div>
-        </div>
-
-        <div class="stage-card stage-5">
+        }
+        else if (activeScene == 5)
+        {
             <div class="card-header">
                 <span class="stage-label neon-text-green">Stage 5: The Absolute Output</span>
                 <h2 class="neon-text-green">Minimalist Absolution</h2>
                 <p>A clean, glassmorphic dashboard displays the final "Absolute Output," such as a generated PDF, accompanied by a celebratory "liquid fluid" or confetti effect.</p>
             </div>
             <div class="card-visual visual-output">
-                <div class="visual-placeholder dashboard-output"></div>
+                <div class="visual-placeholder dashboard-output">
+                    @if(celebrateActive)
+                    {
+                        <h2 class="neon-text-green celebration-text">🎉 Confetti Deployed 🎉</h2>
+                    }
+                </div>
             </div>
             <div class="card-footer glassmorphic">
                 <h3>Zero Friction, Pure Utility</h3>
                 <p>The mission is complete: zero authentication attack surface, zero risk of data breaches, and a deterministic result delivered at edge-native speeds.</p>
+                <div class="gamification-controls">
+                    <button class="celebration-btn" @onclick="Celebrate">Celebrate Output!</button>
+                </div>
             </div>
-        </div>
+        }
     </div>
 </div>
 
