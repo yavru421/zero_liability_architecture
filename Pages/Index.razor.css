@@ -1,22 +1,18 @@
-/* ZLA Gamified App CSS - Refactored */
+/* ZLA Mechanical Card Deck CSS */
 
 :root {
-    --bg-deep-charcoal: #0a0a0c;
-    --bg-card: rgba(25, 25, 32, 0.75);
-    --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    
-    --neon-blue: #00f0ff;
-    --neon-green: #39ff14;
-    --neon-red: #ff0055;
-    --neon-cyan: #00f0ff;
-    --text-muted: #8b8b99;
+    --bg-deep-charcoal: #09090b;
+    --border-dark: #18181b;
+    --border-heavy: #000000;
+    --card-bg-light: #fcfcfc;
+    --text-dark: #18181b;
+    --text-muted: #71717a;
 }
 
 body {
     background-color: var(--bg-deep-charcoal);
     color: #ffffff;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -43,7 +39,7 @@ h1, h2, h3, .card-title {
     flex-direction: column;
     width: 100%;
     height: 100%;
-    transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .swipe-card {
@@ -57,24 +53,23 @@ h1, h2, h3, .card-title {
     position: relative;
 }
 
-/* Card Backgrounds */
-.card-1 { background: radial-gradient(circle at center, #3e2723 0%, #120b0a 100%); }
-.card-2 { background: radial-gradient(circle at center, #1b5e20 0%, #081f0b 100%); }
-.card-3 { background: radial-gradient(circle at center, #00e5ff 0%, #003333 100%); }
-.card-4 { background: radial-gradient(circle at center, #263238 0%, #000000 100%); }
-.card-5 { background: radial-gradient(circle at center, #00c853 0%, #002200 100%); }
-.card-6 { background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.9) 100%); backdrop-filter: blur(10px); }
+/* Mechanical Card Backgrounds (Matte Storybook Colors) */
+.card-1 { background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); } /* Slate Blueprint */
+.card-2 { background: linear-gradient(135deg, #14532d 0%, #064e3b 100%); } /* Dark Green Vault */
+.card-3 { background: linear-gradient(135deg, #0f172a 0%, #020617 100%); } /* Deep Space */
+.card-4 { background: linear-gradient(135deg, #3f3f46 0%, #18181b 100%); } /* Iron Slate */
+.card-5 { background: linear-gradient(135deg, #7c2d12 0%, #451a03 100%); } /* Industrial Rust */
+.card-6 { background: linear-gradient(135deg, #27272a 0%, #09090b 100%); } /* Dark Charcoal */
 
-/* The Illustrated Frame Border */
+/* The Illustrated Comic Frame Border */
 .card-frame-border {
     position: absolute;
-    inset: 0;
-    border: 8px solid #8B4513;
+    inset: 30px;
+    border: 4px solid var(--border-heavy);
+    background: transparent;
     pointer-events: none;
     z-index: 10;
-    /* Simulated illustrated border */
-    border-image: repeating-linear-gradient(45deg, #a0522d, #a0522d 10px, #8b4513 10px, #8b4513 20px) 12;
-    box-shadow: inset 0 0 40px rgba(0,0,0,0.8), 0 0 15px rgba(0,0,0,0.5);
+    box-shadow: 12px 12px 0px rgba(0, 0, 0, 0.4);
 }
 
 .card-inner {
@@ -87,7 +82,7 @@ h1, h2, h3, .card-title {
     gap: 40px;
     align-items: center;
     justify-content: space-between;
-    padding: 60px 8%;
+    padding: 60px 10%;
     box-sizing: border-box;
 }
 
@@ -108,69 +103,82 @@ h1, h2, h3, .card-title {
 }
 
 .card-illustration img {
-    max-width: 100%;
-    max-height: 70vh;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    max-width: 90%;
+    max-height: 60vh;
+    border: 4px solid var(--border-heavy);
+    border-radius: 4px;
+    box-shadow: 8px 8px 0px rgba(0, 0, 0, 0.4);
 }
 
 .card-title {
     font-size: 3.5rem;
     line-height: 1.1;
     margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+    color: #ffffff;
+    text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.8);
 }
 
 .seuss-rhyme {
-    font-size: 1.6rem;
-    font-style: italic;
+    font-size: 1.4rem;
     line-height: 1.6;
-    color: #f8f9fa;
+    color: #f4f4f5;
     margin: 0 0 30px 0;
     font-family: 'Georgia', serif;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .glassmorphic-callout {
-    background: rgba(255, 0, 85, 0.15);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 0, 85, 0.4);
-    border-radius: 12px;
+    background: rgba(24, 24, 27, 0.8);
+    border: 3px solid var(--border-heavy);
+    border-radius: 4px;
     padding: 15px 25px;
     margin-bottom: 30px;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: bold;
-    color: #ffb3c6;
+    color: #f4f4f5;
+    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.3);
 }
 
+/* Mechanical Button Style */
 .cta-btn {
     font-family: 'Fredoka One', cursive;
-    font-size: 1.4rem;
-    padding: 15px 35px;
-    border-radius: 50px;
+    font-size: 1.2rem;
+    padding: 12px 28px;
+    border-radius: 4px;
     cursor: pointer;
-    background: #ffaa00;
-    color: #000;
-    border: none;
-    box-shadow: 0 5px 15px rgba(255, 170, 0, 0.4);
-    transition: all 0.2s ease;
+    background: #e2e8f0;
+    color: #0f172a;
+    border: 3px solid #000000;
+    box-shadow: 4px 4px 0px #000000;
+    transition: all 0.1s ease-in-out;
     align-self: flex-start;
 }
 
-.cta-btn:hover {
-    transform: scale(1.05);
-    background: #ffcc00;
+.cta-btn:hover:not(:disabled) {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px #000000;
+    background: #f8fafc;
+}
+
+.cta-btn:active:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px #000000;
+}
+
+.cta-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .cta-btn.secondary {
     background: transparent;
     color: #fff;
-    border: 2px solid #fff;
-    box-shadow: none;
+    border: 3px solid #fff;
+    box-shadow: 4px 4px 0px rgba(255, 255, 255, 0.3);
 }
 
 .cta-btn.secondary:hover {
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 /* Progress Rail */
@@ -186,17 +194,19 @@ h1, h2, h3, .card-title {
 }
 
 .progress-dot {
-    width: 6px;
-    height: 24px;
-    border-radius: 4px;
-    background-color: rgba(255,255,255,0.3);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
 }
 
 .progress-dot.active {
-    background-color: #fff;
-    height: 48px;
-    box-shadow: 0 0 10px rgba(255,255,255,0.8);
+    background-color: #ffffff;
+    border-color: #000000;
+    transform: scale(1.4);
+    box-shadow: 0 0 0 2px #ffffff;
 }
 
 /* Specific elements */
@@ -208,32 +218,39 @@ h1, h2, h3, .card-title {
     flex-direction: column;
     justify-content: center;
     max-width: 800px;
+    margin: 0 auto;
 }
 
 .mission-text {
     font-size: 1.8rem;
     line-height: 1.5;
     margin-bottom: 40px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
 }
 
 .social-links {
     display: flex;
     gap: 20px;
+    justify-content: center;
 }
 
 .social-links a {
-    color: #00f0ff;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.05);
     text-decoration: none;
-    font-size: 1.4rem;
+    font-size: 1.1rem;
     font-weight: bold;
-    padding: 10px 20px;
-    border: 2px solid #00f0ff;
-    border-radius: 8px;
-    transition: all 0.2s ease;
+    padding: 12px 24px;
+    border: 3px solid #ffffff;
+    border-radius: 4px;
+    box-shadow: 4px 4px 0px rgba(255, 255, 255, 0.35);
+    transition: all 0.15s ease;
 }
 
 .social-links a:hover {
-    background: rgba(0, 240, 255, 0.1);
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0px rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.15);
 }
 
 /* Animations */
@@ -249,40 +266,51 @@ h1, h2, h3, .card-title {
 
 .animated-numbers {
     position: absolute;
-    top: 50%;
+    top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 4rem;
+    font-size: 3rem;
     font-weight: bold;
-    color: #fff;
-    text-shadow: 0 0 20px rgba(0,240,255,0.8);
+    color: #ffffff;
+    font-family: monospace;
     display: flex;
     gap: 5px;
     z-index: 10;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 8px 16px;
+    border: 2px solid #ffffff;
+    border-radius: 4px;
 }
 
+/* Clean Disconnect Interactive Demo Style */
 .interactive-demo {
-    margin-top: 15px;
+    margin-top: 25px;
     display: flex;
-    gap: 10px;
+    gap: 15px;
     align-items: center;
+    background: rgba(0, 0, 0, 0.35);
+    padding: 15px;
+    border: 3px solid var(--border-heavy);
+    border-radius: 6px;
+    box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.4);
 }
 
 .demo-input {
-    background: rgba(255, 255, 255, 0.05);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 25px;
-    padding: 12px 20px;
+    background: #18181b;
+    border: 3px solid var(--border-heavy);
+    border-radius: 4px;
+    padding: 12px 18px;
     font-size: 1.1rem;
-    color: #fff;
+    font-family: monospace;
+    color: #ffffff;
     outline: none;
     transition: all 0.2s ease;
     width: 250px;
 }
 
 .demo-input:focus {
-    border-color: #00f0ff;
-    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+    background: #27272a;
+    border-color: #ffffff;
 }
 
 .demo-input:disabled {
@@ -290,54 +318,17 @@ h1, h2, h3, .card-title {
     cursor: not-allowed;
 }
 
-.demo-status-box {
-    width: 85%;
-    background: rgba(10, 10, 12, 0.95);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 12px;
-    padding: 20px;
-    font-family: monospace;
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #a0a0b0;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-    z-index: 5;
-}
-
-.status-line {
-    margin-bottom: 8px;
-}
-.status-line:last-child {
-    margin-bottom: 0;
-}
-
-.status-val {
-    font-weight: bold;
-}
-.status-val.green {
-    color: #39ff14;
-    text-shadow: 0 0 8px rgba(57,255,20,0.4);
-}
-.status-val.yellow {
-    color: #ffcc00;
-    text-shadow: 0 0 8px rgba(255,204,0,0.4);
-}
-
-.blinking {
-    animation: text-blink 1.2s infinite alternate;
-}
-@keyframes text-blink {
-    0% { opacity: 0.6; }
-    100% { opacity: 1; }
-}
-
 /* Mobile responsive */
 @media (max-width: 900px) {
+    .card-frame-border {
+        inset: 15px;
+    }
+    
     .card-inner {
         flex-direction: column;
         justify-content: center;
         text-align: center;
-        padding: 20px;
+        padding: 40px 20px;
     }
     
     .card-content {
@@ -368,62 +359,60 @@ h1, h2, h3, .card-title {
         flex-direction: row;
         justify-content: space-between;
         padding: 8px 12px;
-        border-radius: 20px;
+        border-radius: 4px;
         max-width: none;
     }
 
     .now-playing-label {
-        display: none; /* Hide text label on small mobile screens to save space */
+        display: none;
     }
 }
 
-/* Audio Control Panel */
+/* Audio Control Panel - Styled Mechanically */
 .audio-control-panel {
     position: fixed;
     top: 25px;
     right: 25px;
     z-index: 10005;
-    background: rgba(25, 25, 32, 0.65);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 30px;
-    padding: 10px 20px;
+    background: #18181b;
+    border: 3px solid #000000;
+    border-radius: 4px;
+    padding: 8px 16px;
     display: flex;
     align-items: center;
     gap: 15px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    color: #fff;
+    box-shadow: 4px 4px 0px #000000;
+    color: #ffffff;
     font-size: 0.9rem;
     font-weight: 500;
 }
 
 .audio-btn.play-pause-btn {
-    background: #ffaa00;
-    color: #000;
-    border: none;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
+    background: #ffffff;
+    color: #000000;
+    border: 2px solid #000000;
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.1rem;
+    font-size: 1rem;
     cursor: pointer;
     padding: 0;
-    box-shadow: 0 4px 10px rgba(255, 170, 0, 0.3);
-    transition: all 0.2s ease;
+    box-shadow: 2px 2px 0px #000000;
+    transition: all 0.1s ease;
 }
 
 .audio-btn.play-pause-btn:hover {
-    transform: scale(1.1);
-    background: #ffcc00;
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0px #000000;
+    background: #e2e8f0;
 }
 
 .now-playing-label {
-    font-family: 'Fredoka One', cursive;
-    letter-spacing: 0.5px;
-    color: rgba(255,255,255,0.85);
+    font-family: monospace;
+    color: #a1a1aa;
 }
 
 .track-selector {
@@ -432,24 +421,24 @@ h1, h2, h3, .card-title {
 }
 
 .track-selector .track-btn {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.15);
-    color: #fff;
-    padding: 6px 12px;
+    background: transparent;
+    border: 2px solid #52525b;
+    color: #ffffff;
+    padding: 4px 10px;
     font-size: 0.8rem;
     font-weight: 600;
-    border-radius: 20px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.1s ease;
 }
 
 .track-selector .track-btn:hover {
-    background: rgba(255,255,255,0.15);
+    border-color: #ffffff;
 }
 
 .track-selector .track-btn.selected {
-    background: #00f0ff;
-    color: #000;
-    border-color: #00f0ff;
-    box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+    background: #ffffff;
+    color: #000000;
+    border-color: #000000;
+    box-shadow: 2px 2px 0px #000000;
 }

@@ -22,10 +22,9 @@
                 <div class="card-content">
                     <h1 class="card-title">Phoning Home.</h1>
                     <blockquote class="seuss-rhyme">
-                        Nearly every app you use "phones home." <br/><br/>
-                        Every file you select, every word you type, and every button you click gets sent to a server somewhere. The moment your data leaves your device, you lose control of it.
+                        Other apps phone home. Every file, click, and keystroke goes to their servers.
                     </blockquote>
-                    <button class="cta-btn" @onclick="NextCard">See the Danger &rarr;</button>
+                    <button class="cta-btn" @onclick="NextCard">See the Threat &rarr;</button>
                 </div>
                 <div class="card-illustration">
                     <img src="images/card1.png" alt="Phoning Home" />
@@ -33,91 +32,75 @@
             </div>
         </div>
         
-        <!-- Card 2: The Data Vault -->
+        <!-- Card 2: The Server Threat -->
         <div class="swipe-card card-2" id="card2">
             <div class="card-frame-border"></div>
             <div class="card-inner">
                 <div class="card-content">
-                    <h1 class="card-title">The Target.</h1>
+                    <h1 class="card-title">The Server Threat.</h1>
                     <blockquote class="seuss-rhyme">
-                        Because other apps collect and store your data on their servers, they create giant targets for hackers. <br/><br/>
-                        If their server gets compromised, your private information is leaked.
+                        Online databases are giant targets for hackers. If they get breached, your data is exposed.
                     </blockquote>
-                    <div class="glassmorphic-callout">
-                        "If a company doesn't store your files, they can't lose them."
-                    </div>
-                    <button class="cta-btn" @onclick="NextCard">Find the Solution &rarr;</button>
+                    <button class="cta-btn" @onclick="NextCard">See the Solution &rarr;</button>
                 </div>
                 <div class="card-illustration">
-                    <img src="images/card2.png" alt="The Database Danger" />
+                    <img src="images/card2.png" alt="The Server Threat" />
                 </div>
             </div>
         </div>
         
-        <!-- Card 3: True On-Device Processing -->
+        <!-- Card 3: On-Device Processing -->
         <div class="swipe-card card-3" id="card3">
             <div class="card-frame-border"></div>
             <div class="card-inner">
                 <div class="card-content">
-                    <h1 class="card-title">Direct Processing.</h1>
+                    <h1 class="card-title">On-Device Processing.</h1>
                     <blockquote class="seuss-rhyme">
-                        ZLA apps are different. They never phone home. <br/><br/>
-                        The entire app runs directly inside your web browser using your own device's power. It does not send a single byte of your work to a server.
+                        ZLA apps run 100% inside your browser using your device's power. They never send your data to a server.
                     </blockquote>
                     <button class="cta-btn" @onclick="NextCard">Test It Out &rarr;</button>
                 </div>
                 <div class="card-illustration">
-                    <img src="images/card3.png" alt="The Magic Machine" />
+                    <img src="images/card3.png" alt="On-Device Processing" />
                 </div>
             </div>
         </div>
         
-        <!-- Card 4: Try the Test -->
+        <!-- Card 4: Disconnect Proof -->
         <div class="swipe-card card-4" id="card4">
             <div class="card-frame-border"></div>
             <div class="card-inner">
                 <div class="card-content">
-                    <h1 class="card-title">Disconnect Test.</h1>
+                    <h1 class="card-title">Disconnect Proof.</h1>
                     <blockquote class="seuss-rhyme">
-                        Type anything below. You can even turn off your internet completely. The app still does the work, because it is running 100% on your device, not on a remote server.
+                        You can turn off your internet completely right now. The tool will still function, because it does not rely on a remote server.
                     </blockquote>
                     
                     <div class="interactive-demo">
-                        <input type="text" class="demo-input" placeholder="Type secret numbers here..." @bind="TestInput" disabled="@IsWiped" />
-                        <button class="cta-btn" @onclick="HandleWipe" disabled="@IsWiped">Wipe Memory</button>
+                        <div class="demo-row">
+                            <input type="number" class="demo-number-input" @bind="Num1" @bind:event="oninput" />
+                            <select class="demo-select" @bind="Op">
+                                <option value="+">+</option>
+                                <option value="-">-</option>
+                                <option value="*">&times;</option>
+                                <option value="/">/</option>
+                            </select>
+                            <input type="number" class="demo-number-input" @bind="Num2" @bind:event="oninput" />
+                            <span class="calc-equals">=</span>
+                            <span class="calc-result">@CalcResult</span>
+                        </div>
+                        <div class="demo-row" style="margin-top: 15px;">
+                            <textarea class="demo-textarea" @bind="TextVal" @bind:event="oninput" placeholder="Type text block here..." rows="3"></textarea>
+                        </div>
+                        <div class="text-stats">
+                            <span>Length: @(TextVal?.Length ?? 0) characters</span>
+                        </div>
                     </div>
 
                     <button class="cta-btn secondary" @onclick="NextCard" style="margin-top: 20px;">Next &rarr;</button>
                 </div>
                 <div class="card-illustration">
-                    <div class="demo-status-box glassmorphic">
-                        <div class="status-line">Files Sent to Server: <span class="status-val green">0 bytes</span></div>
-                        <div class="status-line">Files Stored Online: <span class="status-val green">0 bytes</span></div>
-                        <div class="status-line">Status: 
-                            @if (IsWiped)
-                            {
-                                <span class="status-val green blinking">100% Wiped & Clean</span>
-                            }
-                            else if (!string.IsNullOrEmpty(TestInput))
-                            {
-                                <span class="status-val yellow">Processing on Device CPU</span>
-                            }
-                            else
-                            {
-                                <span class="status-val text-muted">Ready</span>
-                            }
-                        </div>
-                    </div>
-                    <div class="animated-numbers" id="card4-numbers">
-                        @if (!IsWiped && !string.IsNullOrEmpty(TestInput))
-                        {
-                            @foreach(var c in TestInput)
-                            {
-                                <span>@c</span>
-                            }
-                        }
-                    </div>
-                    <img src="images/card4.png" alt="The Disappearing Act" style="opacity: 0.3;" />
+                    <img src="images/card4.png" alt="Disconnect Proof" style="opacity: 0.8;" />
                 </div>
             </div>
         </div>
@@ -127,16 +110,15 @@
             <div class="card-frame-border"></div>
             <div class="card-inner">
                 <div class="card-content">
-                    <h1 class="card-title">Pure Utility.</h1>
+                    <h1 class="card-title">Zero Custody.</h1>
                     <blockquote class="seuss-rhyme">
-                        You get your results instantly, on your own device, in your own hands. <br/><br/>
-                        No signups, no accounts, and no servers in the middle. Because we don't store your files, we can't lose them.
+                        You get your results directly on your screen. Because we don't store your files, we can't lose them. No accounts, no logins.
                     </blockquote>
                     <button class="cta-btn" @onclick='() => TriggerConfetti("card5")'>Finish Job</button>
                     <button class="cta-btn secondary" @onclick="NextCard" style="margin-top: 10px;">Finish &rarr;</button>
                 </div>
                 <div class="card-illustration">
-                    <img src="images/card5.png" alt="The Clean Slate" />
+                    <img src="images/card5.png" alt="Zero Custody" />
                 </div>
             </div>
         </div>
