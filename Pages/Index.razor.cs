@@ -15,14 +15,18 @@ public partial class Index : ComponentBase, IAsyncDisposable
     public int CurrentCard { get; set; } = 0; // JS is 0-indexed
     public bool IsPlaying { get; set; } = false;
     public int ActiveTrackNum { get; set; } = 1;
+    
+    // Demo Interactive State
+    public string TestInput { get; set; } = "";
+    public bool IsWiped { get; set; } = false;
 
     private readonly string[] rhymes = new[]
     {
-        "When you upload your files to a cloud in the sky, (Even to Google Drive, you cannot deny), Your data is shipped to a server out there, And what happens in-between... does anyone care?",
-        "Once it is stored in their black box of data, It's indexed and read, now or sometime later. If a hacker breaks in and the security locks fail, Your private files are suddenly up for sale!",
-        "ZLA apps are built to run right in your hand, The safest and cleanest tools in the land! They run in your browser, on your own device, Processing locally, clean and precise.",
-        "Your files stay home on your own CPU, No servers in-between reading secrets from you. And once you are done and you close up the tab, The memory dissolves — there is nothing to grab!",
-        "Your document's ready, the victory's won, Without sending your files, the processing's done! It's fast and it's private, beginning to end, With zero security debts to defend!"
+        "When you use standard cloud apps, you have to upload your files to their computers. The moment your file leaves your device, you lose control. You don't know who is looking at it, where it is copied, or where it will end up.",
+        "Cloud companies store millions of files in giant online databases. This makes them massive targets for hackers. If their server gets hacked, your private documents get stolen. If a company doesn't store your files, they can't lose them.",
+        "Our apps work like a physical calculator. The tool runs directly inside your web browser using your phone or computer's power. You use the tool, but you never upload your files to our servers. We never see your data.",
+        "Type some text or numbers below to process it directly on your screen. The moment you click wipe, the memory is deleted. Zero bytes are sent to our servers. Zero bytes are stored online.",
+        "Your finished document is generated directly on your screen and saved to your device. No signups, no accounts to create, and no passwords to remember. Pure utility, with zero privacy risks."
     };
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -72,9 +76,11 @@ public partial class Index : ComponentBase, IAsyncDisposable
         await JSRuntime.InvokeVoidAsync("zlaInterop.triggerConfetti", elementId);
     }
     
-    public async Task Dissolve()
+    public async Task HandleWipe()
     {
+        IsWiped = true;
         await JSRuntime.InvokeVoidAsync("zlaInterop.triggerDissolve", "card4-numbers");
+        StateHasChanged();
     }
 
     public async ValueTask DisposeAsync()

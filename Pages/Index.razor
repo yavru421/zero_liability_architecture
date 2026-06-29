@@ -22,10 +22,8 @@
                 <div class="card-content">
                     <h1 class="card-title">The Upload Trap.</h1>
                     <blockquote class="seuss-rhyme">
-                        When you upload your files to a cloud in the sky,<br/>
-                        (Even to Google Drive, you cannot deny),<br/>
-                        Your data is shipped to a server out there,<br/>
-                        And what happens in-between... does anyone care?
+                        When you use standard cloud apps, you have to upload your files to their computers. <br/><br/>
+                        The moment your file leaves your device, you lose control. You don't know who is looking at it, where it is copied, or where it will end up.
                     </blockquote>
                     <button class="cta-btn" @onclick="NextCard">See the Danger &rarr;</button>
                 </div>
@@ -35,20 +33,18 @@
             </div>
         </div>
         
-        <!-- Card 2: The Server Vault -->
+        <!-- Card 2: The Giant Target -->
         <div class="swipe-card card-2" id="card2">
             <div class="card-frame-border"></div>
             <div class="card-inner">
                 <div class="card-content">
-                    <h1 class="card-title">The Server Vault.</h1>
+                    <h1 class="card-title">The Giant Target.</h1>
                     <blockquote class="seuss-rhyme">
-                        Once it is stored in their black box of data,<br/>
-                        It's indexed and read, now or sometime later.<br/>
-                        If a hacker breaks in and the security locks fail,<br/>
-                        Your private files are suddenly up for sale!
+                        Cloud companies store millions of files in giant online databases. <br/><br/>
+                        This makes them massive targets for hackers. If their server gets hacked, your private documents get stolen.
                     </blockquote>
                     <div class="glassmorphic-callout">
-                        "If there is no database to hack, there is no breach to fear."
+                        "If a company doesn't store your files, they can't lose them."
                     </div>
                     <button class="cta-btn" @onclick="NextCard">Find the Solution &rarr;</button>
                 </div>
@@ -58,17 +54,15 @@
             </div>
         </div>
         
-        <!-- Card 3: The Solution -->
+        <!-- Card 3: Running Locally -->
         <div class="swipe-card card-3" id="card3">
             <div class="card-frame-border"></div>
             <div class="card-inner">
                 <div class="card-content">
-                    <h1 class="card-title">Direct Processing.</h1>
+                    <h1 class="card-title">Running Locally.</h1>
                     <blockquote class="seuss-rhyme">
-                        ZLA apps are built to run right in your hand,<br/>
-                        The safest and cleanest tools in the land!<br/>
-                        They run in your browser, on your own device,<br/>
-                        Processing locally, clean and precise.
+                        Our apps work like a physical calculator. The tool runs directly inside your web browser using your phone or computer's power.<br/><br/>
+                        You use the tool, but you never upload your files to our servers. We never see your data.
                     </blockquote>
                     <button class="cta-btn" @onclick="NextCard">Test It Out &rarr;</button>
                 </div>
@@ -78,41 +72,65 @@
             </div>
         </div>
         
-        <!-- Card 4: No Data Transit -->
+        <!-- Card 4: Wiped Clean -->
         <div class="swipe-card card-4" id="card4">
             <div class="card-frame-border"></div>
             <div class="card-inner">
                 <div class="card-content">
-                    <h1 class="card-title">No Data Transit.</h1>
+                    <h1 class="card-title">Wiped Clean.</h1>
                     <blockquote class="seuss-rhyme">
-                        Your files stay home on your own CPU,<br/>
-                        No servers in-between reading secrets from you.<br/>
-                        And once you are done and you close up the tab,<br/>
-                        The memory dissolves &mdash; there is nothing to grab!
+                        Type some text or numbers below to process it directly on your screen. The moment you click wipe, the memory is deleted.
                     </blockquote>
-                    <button class="cta-btn" @onclick="Dissolve">Close Tab</button>
-                    <button class="cta-btn secondary" @onclick="NextCard" style="margin-top: 10px;">Next &rarr;</button>
+                    
+                    <div class="interactive-demo">
+                        <input type="text" class="demo-input" placeholder="Type secret numbers here..." @bind="TestInput" disabled="@IsWiped" />
+                        <button class="cta-btn" @onclick="HandleWipe" disabled="@IsWiped">Wipe Memory</button>
+                    </div>
+
+                    <button class="cta-btn secondary" @onclick="NextCard" style="margin-top: 20px;">Next &rarr;</button>
                 </div>
                 <div class="card-illustration">
-                    <div class="animated-numbers" id="card4-numbers">
-                        <span>1</span><span>3</span><span>8</span><span>5</span><span>0</span><span>2</span>
+                    <div class="demo-status-box glassmorphic">
+                        <div class="status-line">Files Sent to Server: <span class="status-val green">0 bytes</span></div>
+                        <div class="status-line">Files Stored Online: <span class="status-val green">0 bytes</span></div>
+                        <div class="status-line">Status: 
+                            @if (IsWiped)
+                            {
+                                <span class="status-val green blinking">100% Wiped & Clean</span>
+                            }
+                            else if (!string.IsNullOrEmpty(TestInput))
+                            {
+                                <span class="status-val yellow">Processing on Device CPU</span>
+                            }
+                            else
+                            {
+                                <span class="status-val text-muted">Ready</span>
+                            }
+                        </div>
                     </div>
-                    <img src="images/card4.png" alt="The Disappearing Act" />
+                    <div class="animated-numbers" id="card4-numbers">
+                        @if (!IsWiped && !string.IsNullOrEmpty(TestInput))
+                        {
+                            @foreach(var c in TestInput)
+                            {
+                                <span>@c</span>
+                            }
+                        }
+                    </div>
+                    <img src="images/card4.png" alt="The Disappearing Act" style="opacity: 0.3;" />
                 </div>
             </div>
         </div>
         
-        <!-- Card 5: The Output -->
+        <!-- Card 5: Instant Output -->
         <div class="swipe-card card-5" id="card5" style="position: relative;">
             <div class="card-frame-border"></div>
             <div class="card-inner">
                 <div class="card-content">
-                    <h1 class="card-title">The Finished File.</h1>
+                    <h1 class="card-title">Instant Output.</h1>
                     <blockquote class="seuss-rhyme">
-                        Your document's ready, the victory's won,<br/>
-                        Without sending your files, the processing's done!<br/>
-                        It's fast and it's private, beginning to end,<br/>
-                        With zero security debts to defend!
+                        Your finished document is generated directly on your screen and saved to your device.<br/><br/>
+                        No signups, no accounts to create, and no passwords to remember. Pure utility, with zero privacy risks.
                     </blockquote>
                     <button class="cta-btn" @onclick='() => TriggerConfetti("card5")'>Get Finished File</button>
                     <button class="cta-btn secondary" @onclick="NextCard" style="margin-top: 10px;">Finish &rarr;</button>
