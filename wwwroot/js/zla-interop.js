@@ -123,5 +123,18 @@ window.zlaInterop = {
         if (el) {
             el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
+    },
+
+    // Whimsical TTS Narrator
+    speakText: function (text) {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.pitch = 1.35; // Playful Seussian pitch
+            utterance.rate = 1.05;  // Rhythmic pace
+            window.speechSynthesis.speak(utterance);
+        } else {
+            console.warn("Speech Synthesis not supported.");
+        }
     }
 };

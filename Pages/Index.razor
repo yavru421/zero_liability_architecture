@@ -9,19 +9,24 @@
         @if (activeScene == 1)
         {
             <div class="card-header">
-                <span class="stage-label">Step 1: The Old Way</span>
-                <h2>The Password & Upload Trap</h2>
-                <p>Traditional software forces you to sign up, create passwords, and upload your files to their servers just to do a simple job.</p>
+                <span class="stage-label">Step 1: The Greedy Server</span>
+                <h2>The Sneeker-Mc-Snoot</h2>
+                <div class="seuss-rhyme">
+                    "There once was a Server named Sneeker-Mc-Snoot,<br/>
+                    Who gathered up data and kept it as loot.<br/>
+                    'Give me your passwords! Give me your files!'<br/>
+                    You'd upload and wait across miles and miles."
+                </div>
             </div>
             <div class="card-visual visual-fortress">
                 <div class="visual-placeholder fortress"></div>
             </div>
             <div class="card-footer glassmorphic">
                 <h3>Slow and Frustrating</h3>
-                <p>Crews in the field waste time logging in, while your business collects piles of user accounts and passwords to manage.</p>
+                <p>Traditional systems make you wait and make you register, collecting security debt every step of the way.</p>
                 <div class="gamification-controls">
                     <button class="slow-upload-btn" @onclick="SimulateUpload" disabled="@isUploading">
-                        @(isUploading ? $"Uploading to cloud... {uploadProgress}%" : "Try Uploading a File")
+                        @(isUploading ? $"Uploading... {uploadProgress}%" : "Try Uploading a File")
                     </button>
                     @if(uploadProgress >= 100)
                     {
@@ -33,45 +38,60 @@
         else if (activeScene == 2)
         {
             <div class="card-header">
-                <span class="stage-label neon-text-red">Step 2: The Target</span>
+                <span class="stage-label neon-text-red">Step 2: The Sneaky Thief</span>
                 <h2 class="neon-text-red siren-alert-text">The Database Danger</h2>
-                <p>Storing customer information in an online database makes you a giant target for hackers.</p>
+                <div class="seuss-rhyme">
+                    "But servers are targets for sneaks in the night,<br/>
+                    Who steal all your data and run in a fright.<br/>
+                    If there is no database locked in a box,<br/>
+                    There is nothing to steal, and no picking of locks!"
+                </div>
             </div>
             <div class="card-visual visual-breach">
                 <div class="visual-placeholder broken-fortress siren-alert"></div>
             </div>
             <div class="card-footer glassmorphic">
                 <h3>"If there is no database to hack, there is no breach to fear."</h3>
-                <p>When you hold onto customer data, a single leak can ruin your reputation. If you don't store it, they can't steal it.</p>
+                <p>Zero custody means zero liability. We don't store your assets; we reassemble them locally.</p>
                 <div class="gamification-controls">
-                    <button class="btn-next danger-btn" @onclick="NextScene">Find a Better Way</button>
+                    <button class="btn-next danger-btn" @onclick="NextScene">Find the Cure</button>
                 </div>
             </div>
         }
         else if (activeScene == 3)
         {
             <div class="card-header">
-                <span class="stage-label neon-text-cyan">Step 3: The Solution</span>
-                <h2 class="neon-text-cyan">Zero-Liability Tools</h2>
-                <p>We build high-impact business utilities that run entirely inside your web browser, right on your screen.</p>
+                <span class="stage-label neon-text-cyan">Step 3: The Magic Machine</span>
+                <h2 class="neon-text-cyan">Private and Clean!</h2>
+                <div class="seuss-rhyme">
+                    "So we built a tool that stays right in your hand,<br/>
+                    The quickest and safest tool in the land!<br/>
+                    It runs in your browser, it lives on your screen,<br/>
+                    The cleanest machine that you ever have seen."
+                </div>
             </div>
             <div class="card-visual visual-blueprint">
                 <div class="visual-placeholder blueprint wireframe-pulse"></div>
             </div>
             <div class="card-footer glassmorphic">
-                <h3>Private by Design</h3>
-                <p>The tool exists right on your device. There is no central database, no signup forms, and no security risk.</p>
+                <h3>Runs on Your Device</h3>
+                <p>A Zero-Liability tool processes everything right in front of you—bringing utility without security debt.</p>
                 <div class="gamification-controls">
-                    <button class="btn-next cyan-btn" @onclick="NextScene">Try it Yourself</button>
+                    <button class="btn-next cyan-btn" @onclick="NextScene">Try the Magic</button>
                 </div>
             </div>
         }
         else if (activeScene == 4)
         {
             <div class="card-header">
-                <span class="stage-label neon-text-green">Step 4: The Test</span>
-                <h2 class="neon-text-green">Data Disappears Instantly</h2>
-                <p>Watch how your data is processed locally. Once the job is done, it wipes completely clean.</p>
+                <span class="stage-label neon-text-green">Step 4: The Magic Trick</span>
+                <h2 class="neon-text-green">The Disappearing Act</h2>
+                <div class="seuss-rhyme">
+                    "You pour in your numbers, they spin and they slide,<br/>
+                    They calculate quickly right here inside.<br/>
+                    And once you are done and you close up the tab,<br/>
+                    Your data dissolves—there is nothing to grab!"
+                </div>
             </div>
             <div class="card-visual visual-pour">
                 <div class="visual-placeholder data-pour">
@@ -79,8 +99,8 @@
                 </div>
             </div>
             <div class="card-footer glassmorphic">
-                <h3>Absolute Privacy</h3>
-                <p>Your inputs and calculations are processed directly on your machine and destroyed the second you close the browser tab.</p>
+                <h3>Wiped Instantly</h3>
+                <p>Watch it process in memory, and observe it wipe completely clean when finished.</p>
                 <div class="gamification-controls row-controls">
                     <button class="action-btn" @onclick='() => SetPourState("ZLA")'>Process Data Locally</button>
                     <button class="action-btn" @onclick='() => SetPourState("Complete")'>Wipe and Reset</button>
@@ -94,9 +114,14 @@
         else if (activeScene == 5)
         {
             <div class="card-header">
-                <span class="stage-label neon-text-green">Step 5: The Output</span>
-                <h2 class="neon-text-green">Clean Results, Zero Risk</h2>
-                <p>Your finished document or PDF is ready immediately. The job is complete and no data was saved online.</p>
+                <span class="stage-label neon-text-green">Step 5: The Clean Slate</span>
+                <h2 class="neon-text-green">Second to None!</h2>
+                <div class="seuss-rhyme">
+                    "Your PDF's ready, your document's done!<br/>
+                    No logins, no signups, the victory's won!<br/>
+                    It's fast and it's private, beginning to end,<br/>
+                    With zero security debts to defend!"
+                </div>
             </div>
             <div class="card-visual visual-output">
                 <div class="visual-placeholder dashboard-output">
@@ -107,8 +132,8 @@
                 </div>
             </div>
             <div class="card-footer glassmorphic">
-                <h3>Speed, Utility, and Peace of Mind</h3>
-                <p>Zero risk of data breaches, zero compliance headaches, and a fast tool that just works wherever your crew goes.</p>
+                <h3>Absolute Privacy</h3>
+                <p>Speed, utility, and absolute data privacy without the security debt of traditional web platforms.</p>
                 <div class="gamification-controls">
                     <button class="celebration-btn" @onclick="Celebrate">Get Finished File</button>
                 </div>
@@ -131,6 +156,7 @@
         try
         {
             await JSHost.ImportAsync("zla-interop", "../js/zla-interop.js");
+            PlayNarrator();
         }
         catch (Exception ex)
         {

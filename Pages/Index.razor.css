@@ -266,3 +266,13 @@ button {
     color: var(--neon-green);
     text-shadow: 0 0 10px var(--neon-green);
 }
+
+.seuss-rhyme {
+    font-size: 1.3rem;
+    font-style: italic;
+    line-height: 1.7;
+    color: #e2e8f0;
+    margin: 20px 0;
+    font-family: 'Georgia', serif;
+    text-shadow: 0 0 1px rgba(255,255,255,0.1);
+}
