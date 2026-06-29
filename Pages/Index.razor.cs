@@ -18,11 +18,11 @@ public partial class Index : ComponentBase, IAsyncDisposable
 
     private readonly string[] rhymes = new[]
     {
-        "There once was a Server named Sneeker-Mc-Snoot, Who gathered up data and kept it as loot. Give me your passwords! Give me your files! You'd upload and wait across miles and miles.",
-        "But servers are targets for sneaks in the night, Who steal all your data and run in a fright. If there is no database locked in a box, There is nothing to steal, and no picking of locks!",
-        "So we built a tool that stays right in your hand, The quickest and safest tool in the land! It runs in your browser, it lives on your screen, The cleanest machine that you ever have seen.",
-        "You pour in your numbers, they spin and they slide, They calculate quickly right here inside. And once you are done and you close up the tab, Your data dissolves, there is nothing to grab!",
-        "Your P D F's ready, your document's done! No logins, no signups, the victory's won! It's fast and it's private, beginning to end, With zero security debts to defend!"
+        "When you upload your files to a cloud in the sky, (Even to Google Drive, you cannot deny), Your data is shipped to a server out there, And what happens in-between... does anyone care?",
+        "Once it is stored in their black box of data, It's indexed and read, now or sometime later. If a hacker breaks in and the security locks fail, Your private files are suddenly up for sale!",
+        "ZLA apps are built to run right in your hand, The safest and cleanest tools in the land! They run in your browser, on your own device, Processing locally, clean and precise.",
+        "Your files stay home on your own CPU, No servers in-between reading secrets from you. And once you are done and you close up the tab, The memory dissolves — there is nothing to grab!",
+        "Your document's ready, the victory's won, Without sending your files, the processing's done! It's fast and it's private, beginning to end, With zero security debts to defend!"
     };
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
