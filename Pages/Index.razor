@@ -15,33 +15,33 @@
 
     <div class="card-stack" id="cardStack">
         
-        <!-- Card 1: The Upload Trap -->
+        <!-- Card 1: Phoning Home -->
         <div class="swipe-card card-1" id="card1">
             <div class="card-frame-border"></div>
             <div class="card-inner">
                 <div class="card-content">
-                    <h1 class="card-title">The Upload Trap.</h1>
+                    <h1 class="card-title">Phoning Home.</h1>
                     <blockquote class="seuss-rhyme">
-                        When you use standard cloud apps, you have to upload your files to their computers. <br/><br/>
-                        The moment your file leaves your device, you lose control. You don't know who is looking at it, where it is copied, or where it will end up.
+                        Nearly every app you use "phones home." <br/><br/>
+                        Every file you select, every word you type, and every button you click gets sent to a server somewhere. The moment your data leaves your device, you lose control of it.
                     </blockquote>
                     <button class="cta-btn" @onclick="NextCard">See the Danger &rarr;</button>
                 </div>
                 <div class="card-illustration">
-                    <img src="images/card1.png" alt="The Upload Trap" />
+                    <img src="images/card1.png" alt="Phoning Home" />
                 </div>
             </div>
         </div>
         
-        <!-- Card 2: The Giant Target -->
+        <!-- Card 2: The Data Vault -->
         <div class="swipe-card card-2" id="card2">
             <div class="card-frame-border"></div>
             <div class="card-inner">
                 <div class="card-content">
-                    <h1 class="card-title">The Giant Target.</h1>
+                    <h1 class="card-title">The Target.</h1>
                     <blockquote class="seuss-rhyme">
-                        Cloud companies store millions of files in giant online databases. <br/><br/>
-                        This makes them massive targets for hackers. If their server gets hacked, your private documents get stolen.
+                        Because other apps collect and store your data on their servers, they create giant targets for hackers. <br/><br/>
+                        If their server gets compromised, your private information is leaked.
                     </blockquote>
                     <div class="glassmorphic-callout">
                         "If a company doesn't store your files, they can't lose them."
@@ -54,15 +54,15 @@
             </div>
         </div>
         
-        <!-- Card 3: Running Locally -->
+        <!-- Card 3: True On-Device Processing -->
         <div class="swipe-card card-3" id="card3">
             <div class="card-frame-border"></div>
             <div class="card-inner">
                 <div class="card-content">
-                    <h1 class="card-title">Running Locally.</h1>
+                    <h1 class="card-title">Direct Processing.</h1>
                     <blockquote class="seuss-rhyme">
-                        Our apps work like a physical calculator. The tool runs directly inside your web browser using your phone or computer's power.<br/><br/>
-                        You use the tool, but you never upload your files to our servers. We never see your data.
+                        ZLA apps are different. They never phone home. <br/><br/>
+                        The entire app runs directly inside your web browser using your own device's power. It does not send a single byte of your work to a server.
                     </blockquote>
                     <button class="cta-btn" @onclick="NextCard">Test It Out &rarr;</button>
                 </div>
@@ -72,14 +72,14 @@
             </div>
         </div>
         
-        <!-- Card 4: Wiped Clean -->
+        <!-- Card 4: Try the Test -->
         <div class="swipe-card card-4" id="card4">
             <div class="card-frame-border"></div>
             <div class="card-inner">
                 <div class="card-content">
-                    <h1 class="card-title">Wiped Clean.</h1>
+                    <h1 class="card-title">Disconnect Test.</h1>
                     <blockquote class="seuss-rhyme">
-                        Type some text or numbers below to process it directly on your screen. The moment you click wipe, the memory is deleted.
+                        Type anything below. You can even turn off your internet completely. The app still does the work, because it is running 100% on your device, not on a remote server.
                     </blockquote>
                     
                     <div class="interactive-demo">
@@ -122,17 +122,17 @@
             </div>
         </div>
         
-        <!-- Card 5: Instant Output -->
+        <!-- Card 5: Zero Custody -->
         <div class="swipe-card card-5" id="card5" style="position: relative;">
             <div class="card-frame-border"></div>
             <div class="card-inner">
                 <div class="card-content">
-                    <h1 class="card-title">Instant Output.</h1>
+                    <h1 class="card-title">Pure Utility.</h1>
                     <blockquote class="seuss-rhyme">
-                        Your finished document is generated directly on your screen and saved to your device.<br/><br/>
-                        No signups, no accounts to create, and no passwords to remember. Pure utility, with zero privacy risks.
+                        You get your results instantly, on your own device, in your own hands. <br/><br/>
+                        No signups, no accounts, and no servers in the middle. Because we don't store your files, we can't lose them.
                     </blockquote>
-                    <button class="cta-btn" @onclick='() => TriggerConfetti("card5")'>Get Finished File</button>
+                    <button class="cta-btn" @onclick='() => TriggerConfetti("card5")'>Finish Job</button>
                     <button class="cta-btn secondary" @onclick="NextCard" style="margin-top: 10px;">Finish &rarr;</button>
                 </div>
                 <div class="card-illustration">

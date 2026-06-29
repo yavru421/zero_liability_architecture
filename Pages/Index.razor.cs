@@ -22,11 +22,11 @@ public partial class Index : ComponentBase, IAsyncDisposable
 
     private readonly string[] rhymes = new[]
     {
-        "When you use standard cloud apps, you have to upload your files to their computers. The moment your file leaves your device, you lose control. You don't know who is looking at it, where it is copied, or where it will end up.",
-        "Cloud companies store millions of files in giant online databases. This makes them massive targets for hackers. If their server gets hacked, your private documents get stolen. If a company doesn't store your files, they can't lose them.",
-        "Our apps work like a physical calculator. The tool runs directly inside your web browser using your phone or computer's power. You use the tool, but you never upload your files to our servers. We never see your data.",
-        "Type some text or numbers below to process it directly on your screen. The moment you click wipe, the memory is deleted. Zero bytes are sent to our servers. Zero bytes are stored online.",
-        "Your finished document is generated directly on your screen and saved to your device. No signups, no accounts to create, and no passwords to remember. Pure utility, with zero privacy risks."
+        "Nearly every app you use 'phones home.' Every file you select, every word you type, and every button you click gets sent to a server somewhere. The moment your data leaves your device, you lose control of it.",
+        "Because other apps collect and store your data on their servers, they create giant targets for hackers. If their server gets compromised, your private information is leaked.",
+        "ZLA apps are different. They never phone home. The entire app runs directly inside your web browser using your own device's power. It does not send a single byte of your work to a server.",
+        "Type anything below. You can even turn off your internet completely. The app still does the work, because it is running 100% on your device, not on a remote server.",
+        "You get your results instantly, on your own device, in your own hands. No signups, no accounts, and no servers in the middle. Because we don't store your files, we can't lose them."
     };
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
