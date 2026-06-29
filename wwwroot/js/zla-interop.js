@@ -8,6 +8,50 @@ window.zlaInterop = {
         let currentY = 0;
         let isDragging = false;
         
+        // Initialize HTML5 Audio elements
+        window.zlaAudio = {
+            track1: new Audio('audio/sneeker_mc_snoot.mp4'),
+            track2: new Audio('audio/snoots_last_confession.mp4'),
+            currentTrack: null
+        };
+        
+        window.zlaAudio.track1.loop = true;
+        window.zlaAudio.track2.loop = true;
+
+        const playTrack = (trackName) => {
+            const track = window.zlaAudio[trackName];
+            const otherTrack = trackName === 'track1' ? window.zlaAudio.track2 : window.zlaAudio.track1;
+            
+            if (window.zlaAudio.currentTrack !== track) {
+                otherTrack.pause();
+                otherTrack.currentTime = 0;
+                
+                track.play().catch(e => {
+                    console.log("Audio play blocked by browser, waiting for user interaction.", e);
+                });
+                window.zlaAudio.currentTrack = track;
+            }
+        };
+
+        const handleAudioForCard = (index) => {
+            // Card 1-2 (0, 1): Play Sneeker Mc Snoot
+            // Card 3-6 (2, 3, 4, 5): Play Snoot's Last Confession
+            if (index === 0 || index === 1) {
+                playTrack('track1');
+            } else {
+                playTrack('track2');
+            }
+        };
+
+        // Start audio on first touch/click interaction to bypass browser autoplay blocks
+        const initAudioOnInteraction = () => {
+            handleAudioForCard(currentIndex);
+            window.removeEventListener('click', initAudioOnInteraction);
+            window.removeEventListener('touchstart', initAudioOnInteraction);
+        };
+        window.addEventListener('click', initAudioOnInteraction);
+        window.addEventListener('touchstart', initAudioOnInteraction);
+
         const getStack = () => document.querySelector('.card-stack');
         
         const updateTransform = (offset = 0, animate = false) => {
@@ -18,9 +62,6 @@ window.zlaInterop = {
         };
 
         const handleStart = (y) => {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-            }
             startY = y;
             isDragging = true;
             currentY = y;
@@ -47,9 +88,11 @@ window.zlaInterop = {
             if (deltaY < -60 && currentIndex < cardsCount - 1) {
                 currentIndex++;
                 dotNetHelper.invokeMethodAsync('OnCardSnapped', currentIndex);
+                handleAudioForCard(currentIndex);
             } else if (deltaY > 60 && currentIndex > 0) {
                 currentIndex--;
                 dotNetHelper.invokeMethodAsync('OnCardSnapped', currentIndex);
+                handleAudioForCard(currentIndex);
             }
             
             updateTransform(0, true);
@@ -79,9 +122,9 @@ window.zlaInterop = {
             }
             
             if (changed) {
-                if ('speechSynthesis' in window) window.speechSynthesis.cancel();
                 updateTransform(0, true);
                 dotNetHelper.invokeMethodAsync('OnCardSnapped', currentIndex);
+                handleAudioForCard(currentIndex);
             }
         });
         
@@ -158,16 +201,8 @@ window.zlaInterop = {
         }
     },
 
-    // Whimsical TTS Narrator
+    // Legacy Whimsical TTS Narrator (No-op since we are using MP4 music files now)
     speakText: function (text) {
-        if ('speechSynthesis' in window) {
-            window.speechSynthesis.cancel();
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.pitch = 1.35; // Playful Seussian pitch
-            utterance.rate = 1.05;  // Rhythmic pace
-            window.speechSynthesis.speak(utterance);
-        } else {
-            console.warn("Speech Synthesis not supported.");
-        }
+        console.log("TTS disabled in favor of background MP4 audio tracks.");
     }
 };
