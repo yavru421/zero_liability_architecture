@@ -9,23 +9,23 @@
         @if (activeScene == 1)
         {
             <div class="card-header">
-                <span class="stage-label">Stage 1: The Sluggish SaaS Monument</span>
-                <h2>The Fortress of Friction</h2>
-                <p>Represented as a giant, locked stone fortress symbolizing traditional SaaS, where users are met with sluggish upload buttons and mandatory sign-up friction.</p>
+                <span class="stage-label">Step 1: The Old Way</span>
+                <h2>The Password & Upload Trap</h2>
+                <p>Traditional software forces you to sign up, create passwords, and upload your files to their servers just to do a simple job.</p>
             </div>
             <div class="card-visual visual-fortress">
                 <div class="visual-placeholder fortress"></div>
             </div>
             <div class="card-footer glassmorphic">
-                <h3>Centralized Liability</h3>
-                <p>Traditional systems force the centralization of sensitive data into fragile databases, creating a massive target for bad actors.</p>
+                <h3>Slow and Frustrating</h3>
+                <p>Crews in the field waste time logging in, while your business collects piles of user accounts and passwords to manage.</p>
                 <div class="gamification-controls">
                     <button class="slow-upload-btn" @onclick="SimulateUpload" disabled="@isUploading">
-                        @(isUploading ? $"Uploading... {uploadProgress}%" : "Simulate SaaS Upload")
+                        @(isUploading ? $"Uploading to cloud... {uploadProgress}%" : "Try Uploading a File")
                     </button>
                     @if(uploadProgress >= 100)
                     {
-                        <button class="btn-next" @onclick="NextScene">Next Stage</button>
+                        <button class="btn-next" @onclick="NextScene">See the Danger</button>
                     }
                 </div>
             </div>
@@ -33,60 +33,60 @@
         else if (activeScene == 2)
         {
             <div class="card-header">
-                <span class="stage-label neon-text-red">Stage 2: The Attack Surface</span>
-                <h2 class="neon-text-red siren-alert-text">Breach Vulnerability</h2>
-                <p>The fortress appears broken, triggered by visual "neon laser red" sirens and cascading security/compliance warnings.</p>
+                <span class="stage-label neon-text-red">Step 2: The Target</span>
+                <h2 class="neon-text-red siren-alert-text">The Database Danger</h2>
+                <p>Storing customer information in an online database makes you a giant target for hackers.</p>
             </div>
             <div class="card-visual visual-breach">
                 <div class="visual-placeholder broken-fortress siren-alert"></div>
             </div>
             <div class="card-footer glassmorphic">
-                <h3>The Security Debt</h3>
-                <p>Every byte of customer data held in custody is a liability; if there is a database to hack, there is a breach to fear.</p>
+                <h3>"If there is no database to hack, there is no breach to fear."</h3>
+                <p>When you hold onto customer data, a single leak can ruin your reputation. If you don't store it, they can't steal it.</p>
                 <div class="gamification-controls">
-                    <button class="btn-next danger-btn" @onclick="NextScene">Shift Paradigm</button>
+                    <button class="btn-next danger-btn" @onclick="NextScene">Find a Better Way</button>
                 </div>
             </div>
         }
         else if (activeScene == 3)
         {
             <div class="card-header">
-                <span class="stage-label neon-text-cyan">Stage 3: The Digital Jig</span>
-                <h2 class="neon-text-cyan">The Paradigm Shift</h2>
-                <p>A clean, high-contrast cyan and neon-green wireframe blueprint appears, representing the ZLA "Jig".</p>
+                <span class="stage-label neon-text-cyan">Step 3: The Solution</span>
+                <h2 class="neon-text-cyan">Zero-Liability Tools</h2>
+                <p>We build high-impact business utilities that run entirely inside your web browser, right on your screen.</p>
             </div>
             <div class="card-visual visual-blueprint">
                 <div class="visual-placeholder blueprint wireframe-pulse"></div>
             </div>
             <div class="card-footer glassmorphic">
-                <h3>Scaffolding over Syntax</h3>
-                <p>This wireframe neon input form is a temporary structure designed to hold the business logic of CX and browser API interop straight.</p>
+                <h3>Private by Design</h3>
+                <p>The tool exists right on your device. There is no central database, no signup forms, and no security risk.</p>
                 <div class="gamification-controls">
-                    <button class="btn-next cyan-btn" @onclick="NextScene">See it in Action</button>
+                    <button class="btn-next cyan-btn" @onclick="NextScene">Try it Yourself</button>
                 </div>
             </div>
         }
         else if (activeScene == 4)
         {
             <div class="card-header">
-                <span class="stage-label neon-text-green">Stage 4: The Zero Data Custody Wipe</span>
-                <h2 class="neon-text-green">The Data Pour & Form Dissolve</h2>
-                <p>Users "pour" data into the jig: as the "concrete" (data output) sets, the neon wireframe form physically dissolves or wipes clean.</p>
+                <span class="stage-label neon-text-green">Step 4: The Test</span>
+                <h2 class="neon-text-green">Data Disappears Instantly</h2>
+                <p>Watch how your data is processed locally. Once the job is done, it wipes completely clean.</p>
             </div>
             <div class="card-visual visual-pour">
                 <div class="visual-placeholder data-pour">
-                    <p class="pour-status">Pour State: @pourState</p>
+                    <p class="pour-status">Current Status: @(pourState == "ZLA" ? "Processing Locally" : pourState == "Complete" ? "Cleaned & Wiped" : "Ready to Process")</p>
                 </div>
             </div>
             <div class="card-footer glassmorphic">
-                <h3>Total Data Sovereignty</h3>
-                <p>Customer inputs and calculations are processed locally in the Blazor WASM environment and destroyed the moment the browser tab is closed.</p>
+                <h3>Absolute Privacy</h3>
+                <p>Your inputs and calculations are processed directly on your machine and destroyed the second you close the browser tab.</p>
                 <div class="gamification-controls row-controls">
-                    <button class="action-btn" @onclick='() => SetPourState("ZLA")'>Pour Data (Local)</button>
-                    <button class="action-btn" @onclick='() => SetPourState("Complete")'>Finish Pour</button>
+                    <button class="action-btn" @onclick='() => SetPourState("ZLA")'>Process Data Locally</button>
+                    <button class="action-btn" @onclick='() => SetPourState("Complete")'>Wipe and Reset</button>
                     @if (pourState == "Complete")
                     {
-                        <button class="btn-next green-btn" @onclick="NextScene">Generate Output</button>
+                        <button class="btn-next green-btn" @onclick="NextScene">Get Your Output</button>
                     }
                 </div>
             </div>
@@ -94,23 +94,23 @@
         else if (activeScene == 5)
         {
             <div class="card-header">
-                <span class="stage-label neon-text-green">Stage 5: The Absolute Output</span>
-                <h2 class="neon-text-green">Minimalist Absolution</h2>
-                <p>A clean, glassmorphic dashboard displays the final "Absolute Output," such as a generated PDF, accompanied by a celebratory "liquid fluid" or confetti effect.</p>
+                <span class="stage-label neon-text-green">Step 5: The Output</span>
+                <h2 class="neon-text-green">Clean Results, Zero Risk</h2>
+                <p>Your finished document or PDF is ready immediately. The job is complete and no data was saved online.</p>
             </div>
             <div class="card-visual visual-output">
                 <div class="visual-placeholder dashboard-output">
                     @if(celebrateActive)
                     {
-                        <h2 class="neon-text-green celebration-text">🎉 Confetti Deployed 🎉</h2>
+                        <h2 class="neon-text-green celebration-text">🎉 Document Generated Safely 🎉</h2>
                     }
                 </div>
             </div>
             <div class="card-footer glassmorphic">
-                <h3>Zero Friction, Pure Utility</h3>
-                <p>The mission is complete: zero authentication attack surface, zero risk of data breaches, and a deterministic result delivered at edge-native speeds.</p>
+                <h3>Speed, Utility, and Peace of Mind</h3>
+                <p>Zero risk of data breaches, zero compliance headaches, and a fast tool that just works wherever your crew goes.</p>
                 <div class="gamification-controls">
-                    <button class="celebration-btn" @onclick="Celebrate">Celebrate Output!</button>
+                    <button class="celebration-btn" @onclick="Celebrate">Get Finished File</button>
                 </div>
             </div>
         }
