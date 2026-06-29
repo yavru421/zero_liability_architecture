@@ -2,90 +2,84 @@
 @using System.Runtime.InteropServices.JavaScript
 @implements IDisposable
 
-<div class="pipeline-container">
-    @if (activeScene == 1)
-    {
-        <div class="scene scene-1">
-            <div class="glass-card">
-                <h1 class="neon-text-red">The Hook: Sluggish SaaS Monument</h1>
-                <div class="attack-fortress">Giant Locked Fortress</div>
-                <button class="slow-upload-btn" @onclick="SimulateUpload" disabled="@isUploading">
-                    @(isUploading ? $"Uploading... {uploadProgress}%" : "Simulate SaaS Upload")
-                </button>
-                @if(uploadProgress >= 100)
-                {
-                    <button class="btn-next" @onclick="NextScene">Next Scene</button>
-                }
+<div class="pipeline-wrapper">
+    <h1 class="pipeline-title">Operational Absolution: The Zero-Liability Architecture (ZLA) Pipeline</h1>
+    <div class="pipeline-container">
+        <div class="stage-card stage-1">
+            <div class="card-header">
+                <span class="stage-label">Stage 1: The Sluggish SaaS Monument</span>
+                <h2>The Fortress of Friction</h2>
+                <p>Represented as a giant, locked stone fortress symbolizing traditional SaaS, where users are met with sluggish upload buttons and mandatory sign-up friction.</p>
+            </div>
+            <div class="card-visual visual-fortress">
+                <div class="visual-placeholder fortress"></div>
+            </div>
+            <div class="card-footer glassmorphic">
+                <h3>Centralized Liability</h3>
+                <p>Traditional systems force the centralization of sensitive data into fragile databases, creating a massive target for bad actors.</p>
             </div>
         </div>
-    }
-    else if (activeScene == 2)
-    {
-        <div class="scene scene-2">
-            <div class="glass-card" style="max-width: 850px; text-align: left; padding: 40px;">
-                <h1 class="neon-text-red siren-alert" style="margin-bottom: 20px;">The Honeypot Problem</h1>
-                
-                <h3 class="neon-text-blue" style="font-style: italic; border-left: 4px solid #00f0ff; padding-left: 20px; margin-bottom: 25px; line-height: 1.4;">
-                    "If there is no database to hack, there is no breach to fear. We build high-impact business utilities that run entirely on the client’s machine—bringing speed, utility, and absolute data privacy without the security debt of traditional web platforms."
-                </h3>
-                
-                <p style="font-size: 1.1rem; margin-bottom: 15px;"><strong>Modern web software is broken.</strong> Traditional systems force clients to centralize sensitive customer data into fragile databases, creating a massive security liability and target for bad actors.</p>
-                
-                <p style="font-size: 1.1rem; margin-bottom: 20px;"><strong>My approach is different: Zero-Liability Architecture.</strong> I don’t replace your digital ecosystem; I reassemble your existing assets. By fabricating custom, client-side utility engines that run directly on the user's device, we deliver:</p>
-                
-                <ul style="margin-top: 15px; line-height: 1.7; font-size: 1.05rem; list-style-type: square; padding-left: 25px;">
-                    <li><strong class="neon-text-green">Zero Data Custody:</strong> Customer inputs, calculations, and documents are processed locally and destroyed upon closing the browser tab.</li>
-                    <li><strong class="neon-text-green">Zero Friction:</strong> No bloated sign-up forms, password managers, or login screens for crews in the field.</li>
-                    <li><strong class="neon-text-green">Zero Security Liabilities:</strong> Zero authentication attack surface, zero risk of data breaches, and zero data compliance overhead.</li>
-                    <li><strong class="neon-text-green">Pure Utility & Analytics:</strong> Secure, anonymous telemetry to prove business value (e.g., job completion volume) without ever compromising customer privacy.</li>
-                </ul>
 
-                <button class="btn-next" @onclick="NextScene" style="margin-top: 35px; width: 100%;">Shift Paradigm</button>
+        <div class="stage-card stage-2">
+            <div class="card-header">
+                <span class="stage-label neon-text-red">Stage 2: The Attack Surface</span>
+                <h2 class="neon-text-red">Breach Vulnerability</h2>
+                <p>The fortress appears broken, triggered by visual "neon laser red" sirens and cascading security/compliance warnings.</p>
+            </div>
+            <div class="card-visual visual-breach">
+                <div class="visual-placeholder broken-fortress"></div>
+            </div>
+            <div class="card-footer glassmorphic">
+                <h3>The Security Debt</h3>
+                <p>Every byte of customer data held in custody is a liability; if there is a database to hack, there is a breach to fear.</p>
             </div>
         </div>
-    }
-    else if (activeScene == 3)
-    {
-        <div class="scene scene-3">
-            <div class="glass-card">
-                <h1 class="neon-text-blue">The Paradigm Shift</h1>
-                <div class="wireframe-jig">
-                    <p>Zero-Liability Architecture Blueprint</p>
-                </div>
-                <button class="btn-next" @onclick="NextScene">See it in Action</button>
+
+        <div class="stage-card stage-3">
+            <div class="card-header">
+                <span class="stage-label neon-text-cyan">Stage 3: The Digital Jig</span>
+                <h2 class="neon-text-cyan">The Paradigm Shift</h2>
+                <p>A clean, high-contrast cyan and neon-green wireframe blueprint appears, representing the ZLA "Jig".</p>
+            </div>
+            <div class="card-visual visual-blueprint">
+                <div class="visual-placeholder blueprint"></div>
+            </div>
+            <div class="card-footer glassmorphic">
+                <h3>Scaffolding over Syntax</h3>
+                <p>This wireframe neon input form is a temporary structure designed to hold the business logic of CX and browser API interop straight.</p>
             </div>
         </div>
-    }
-    else if (activeScene == 4)
-    {
-        <div class="scene scene-4">
-            <div class="glass-card">
-                <h1 class="neon-text-green">Zero Data Custody in Action</h1>
-                <div class="data-pour-container">
-                    <p>Pour State: @pourState</p>
-                    <button @onclick='() => SetPourState("ZLA")'>Pour Data (Local)</button>
-                    <button @onclick='() => SetPourState("Complete")'>Finish Pour</button>
-                </div>
-                <button class="btn-next" @onclick="NextScene">Generate Output</button>
+
+        <div class="stage-card stage-4">
+            <div class="card-header">
+                <span class="stage-label neon-text-green">Stage 4: The Zero Data Custody Wipe</span>
+                <h2 class="neon-text-green">The Data Pour & Form Dissolve</h2>
+                <p>Users "pour" data into the jig: as the "concrete" (data output) sets, the neon wireframe form physically dissolves or wipes clean.</p>
+            </div>
+            <div class="card-visual visual-pour">
+                <div class="visual-placeholder data-pour"></div>
+            </div>
+            <div class="card-footer glassmorphic">
+                <h3>Total Data Sovereignty</h3>
+                <p>Customer inputs and calculations are processed locally in the Blazor WASM environment and destroyed the moment the browser tab is closed.</p>
             </div>
         </div>
-    }
-    else if (activeScene == 5)
-    {
-        <div class="scene scene-5">
-            <div class="glass-card">
-                <h1 class="neon-text-blue">The Absolute Output</h1>
-                <div class="dashboard">
-                    <p>Local processing complete. 100% Private PDF generated.</p>
-                </div>
-                <button class="celebration-btn" @onclick="Celebrate">Celebrate!</button>
-                @if(celebrateActive)
-                {
-                    <p class="neon-text-green">🎉 Confetti Deployed 🎉</p>
-                }
+
+        <div class="stage-card stage-5">
+            <div class="card-header">
+                <span class="stage-label neon-text-green">Stage 5: The Absolute Output</span>
+                <h2 class="neon-text-green">Minimalist Absolution</h2>
+                <p>A clean, glassmorphic dashboard displays the final "Absolute Output," such as a generated PDF, accompanied by a celebratory "liquid fluid" or confetti effect.</p>
+            </div>
+            <div class="card-visual visual-output">
+                <div class="visual-placeholder dashboard-output"></div>
+            </div>
+            <div class="card-footer glassmorphic">
+                <h3>Zero Friction, Pure Utility</h3>
+                <p>The mission is complete: zero authentication attack surface, zero risk of data breaches, and a deterministic result delivered at edge-native speeds.</p>
             </div>
         </div>
-    }
+    </div>
 </div>
 
 @code {
